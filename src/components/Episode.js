@@ -3,11 +3,11 @@ import parse from 'html-react-parser';
 
 const Episode = ({episode})=> {
     const {id, image, name, season, number, summary, runtime} = episode;
-
+    const imgsrc = image ? image.medium : './stranger_things.png';
     console.log("image: ", image);
 
     return(<div className="episode" key={id}>
-        {image && <img className="episode-image" src={image.medium} alt={name} />}
+        <img className="episode-image" src={imgsrc} alt={name} />
         <div className="episode-info">
             <p className="episode-number">Season {season}, Episode {number}</p>
             <h3>{name}</h3>
