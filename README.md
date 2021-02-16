@@ -1,12 +1,13 @@
-# React Testing TV Show
+# Integration Testing React Components: Stranger Things
 
-## Advanced Web Applications ➡ Testing React
+This module explored making testing the passing of props into test components, rerendering components and using mocks to both monitor functional props passing and mock external modules. In this project, you will practice each of these practices in the testing of an application that displays TV show data.
 
 ### Objectives
 
-- use mocks in unit tests
-- test asynchronous API calls that are made in a component
-- test React components as the props change
+- Understand how to test the effects of passing specific props into a component
+- Understand how to monitor the behavoir of functional mock props.
+- Understand how and when to test using the rerender method
+- Learn how to mock the use of an external module
 
 ### Introduction
 
@@ -14,17 +15,15 @@ As a developer, you will be asked to write tests for the feature you are buildin
 
 Get the project fired up and start using it as a user would. Try to go through the user sequences for this feature that you think users would go through. Once you have those in mind, you will have an idea of what to test in your application.
 
-### Project Set Up
+## Instructions
+### Task 1: Project Set Up
+* [ ] Create a forked copy of this project.
+* [ ] Clone your OWN version of the repository in your terminal
+* [ ] cd into the project base directory `cd web-module-project-reducer-pattern`
+* [ ] Download project dependencies by running `npm install`
+* [ ] Start up the app using `npm start`
 
-- [ ] Create a forked copy of this project.
-- [ ] Add your team lead as collaborator on Github.
-- [ ] Clone your OWN version of the repository in your terminal
-- [ ] CD into the project base directory `cd React-Testing-TV-Show`
-- [ ] Download project dependencies by running `npm install`
-- [ ] Start up the app using `npm start`
-- [ ] Create a new branch: git checkout -b `<firstName-lastName>`.
-- [ ] Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly.
-- [ ] Push commits: git push origin `<firstName-lastName>`.
+### Task 2: Project Requirements
 
 Follow these steps for completing your project.
 
