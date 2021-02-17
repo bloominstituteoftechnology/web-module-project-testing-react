@@ -1,34 +1,17 @@
 import React, { useState, useEffect } from "react";
-import fetchShow from './utils/fetchShow';
-
 
 import Loading from "./components/Loading";
-import ShowDisplay from "./components/ShowDisplay";
+import Display from "./components/Display";
 
 import "./styles.css";
 
 export default function App() {
   const [show, setShow] = useState(null);
-  const [selectedSeason, setSelectedSeason] = useState(null);
-
-  useEffect(() => {
-    fetchShow()
-      .then(data => {
-        setShow(data);
-      });
-  }, []);
-
-  const handleSelect = e => {
-    setSelectedSeason(e.target.value);
-  };
+  const [selectedSeason, setSelectedSeason] = useState("Select A Season");
 
   return (
     <div className="App">
-      <img className="poster-img" src='http://static.tvmaze.com/uploads/images/original_untouched/200/501942.jpg' alt="header image" />
-      
-      {
-        !show ? <Loading /> : <ShowDisplay show={show} selectedSeason={selectedSeason} handleSelect={handleSelect}/>
-      }
+      <Display show={show} setSelectedSeason={setSelectedSeason} setShow={setShow} selectedSeason={selectedSeason}/>
     </div>
   );
 }

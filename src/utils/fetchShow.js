@@ -1,4 +1,5 @@
 import axios from 'axios';
+import stripTags from 'striptags';
 
 const formatSeasons = (allEpisodes) => {
   const seasons = [
@@ -9,7 +10,10 @@ const formatSeasons = (allEpisodes) => {
   ];
 
   allEpisodes.forEach((episode) => {
-    seasons[episode.season-1].episodes.push(episode);
+    seasons[episode.season-1].episodes.push({
+      ...episode,
+      summary: stripTags(episode.summary)
+    });
   });
 
   return seasons;
@@ -25,7 +29,7 @@ const fetchShow = () => {
       return {
         name: data.name,
         image: data.image,
-        summary: "A love letter to the '80s classics that captivated a generation, Stranger Things is set in 1983 Indiana, where a young boy vanishes into thin air. As friends, family and local police search for answers, they are drawn into an extraordinary mystery involving top-secret government experiments, terrifying supernatural forces and one very strange little girl.",
+        summary: stripTags(data.summary),
         seasons: formatSeasons(data._embedded.episodes)
       };
     });
