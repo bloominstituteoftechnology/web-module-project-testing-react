@@ -1,25 +1,29 @@
 import React from 'react';
 import Episodes from "./Episodes";
+import Loading from './Loading';
 
 const Show = (props) => {
     const { handleSelect, selectedSeason, show } = props;
-    const {image, name, summary, seasons} = show;
+    
+    if (!show)
+      return <Loading />
 
-    return(<div>
-        <h1>{name}</h1>
-        <p>{summary}</p>
+    return(<div data-testid="show-container">
+        <h1>{show.name}</h1>
+        <p>{show.summary}</p>
 
+        <label htmlFor="seasons">Select A Season</label><br/>
         <select onChange={handleSelect} name="seasons" id="seasons">
-          <option>Select A Season</option>
+          <option value="none"></option>
           {
-            seasons.map(season=>{
-              return(<option data-testId="season-option" key={season.id} value={season.id}>{season.name}</option>);
+            show.seasons.map(season=>{
+              return(<option data-testid="season-option" key={season.id} value={season.id}>{season.name}</option>);
             })
           }
         </select>
 
         {
-            (selectedSeason !== "Select A Season") && <Episodes episodes={seasons[selectedSeason].episodes} />
+            (selectedSeason !== "none") && <Episodes episodes={show.seasons[selectedSeason].episodes} />
         }
     </div>);
 }

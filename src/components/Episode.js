@@ -1,11 +1,10 @@
 import React from 'react';
-import parse from 'html-react-parser';
 
 const Episode = (props)=> {
     const {episode} = props;
     const {id, image, name, season, number, summary, runtime} = episode;
-    const imgsrc = image ? image.medium : './stranger_things.png';
-    
+    const imgsrc = image || './stranger_things.png';
+
     return(<div className="episode" key={id}>
         <img className="episode-image" src={imgsrc} alt={imgsrc} />
         <div className="episode-info">

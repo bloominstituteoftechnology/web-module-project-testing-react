@@ -12,7 +12,8 @@ const formatSeasons = (allEpisodes) => {
   allEpisodes.forEach((episode) => {
     seasons[episode.season-1].episodes.push({
       ...episode,
-      summary: stripTags(episode.summary)
+      summary: stripTags(episode.summary),
+      image: episode.image ? episode.image.medium : null
     });
   });
 
