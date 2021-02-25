@@ -24,6 +24,8 @@ Get the project fired up and start using it as a user would. Try to go through t
 * [ ] cd into the project base directory `cd web-module-project-reducer-pattern`
 * [ ] Download project dependencies by running `npm install`
 * [ ] Start up the app using `npm start`
+- [ ] With each saved change in your editor, the test runner will re-run all the tests
+- [ ] **IMPORTANT** If a test fails, use the test runner's error messages to find out why it is failing
 
 ### Task 2: Project Requirements
 #### The Episode Component
