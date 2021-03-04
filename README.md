@@ -4,7 +4,7 @@ This module explored passing props into test components, rerendering components 
 
 ## Objectives
 - Understand how to test the effects of passing specific props into a component
-- Understand how to monitor the behavoir of functional mock props.
+- Understand how to monitor the behavior of functional mock props.
 - Understand how and when to test using the rerender method
 - Learn how to mock the use an external module
 
@@ -15,7 +15,7 @@ Get the project fired up and start using it as a user would. Try to go through t
 
 ![Stranger Example](project-goals.gif)
 
-***Make sure to complete your tasks one at a time and complete test each task before proceding forward.***
+***Make sure to complete your tasks one at a time and complete test each task before proceeding forward.***
 
 ## Instructions
 ### Task 1: Project Set Up
@@ -32,7 +32,7 @@ Get the project fired up and start using it as a user would. Try to go through t
 > *This component displays a single episode worth of data. To test it, let's try our some different varieties on what we should pass into our component's props.*
 
 * [ ] Complete a test that shows the Episode component renders. Pass in the provided example episode data as a test prop.
-* [ ] Modify the test data to display a specific summary statement. Complete a test that shows that the summary value passed in to the Episode component displays as expected. **Use at least then 3 different types of expect statements to test the the existance of the summary value.**
+* [ ] Modify the test data to display a specific summary statement. Complete a test that shows that the summary value passed in to the Episode component displays as expected. **Use at least then 3 different types of expect statements to test the the existence of the summary value.**
 * [ ] The episode component displays a default value ('./stranger_things.png') when a image url is not provided. Create a new piece of test data with the image property set to `null`. Test that the alt tag of the image displayed is set to './stranger_things.png'.
 
 ### The Show Component
@@ -40,7 +40,7 @@ Get the project fired up and start using it as a user would. Try to go through t
 
 * [ ] Build an example data structure that contains the show data in the correct format. A show should contain a name, a summary and an array of seasons, each with a id, name and an (empty) list of episodes within them. Use console.logs within the client code if you need to to verify the structure of show data.
 * [ ] Test that the Show component renders when your test data is passed in through show prop and "none" is passed in through selectedSeason prop.
-* [ ] Test that the Loading component displays when null is passed into the show prop (look at the Loading component to see how to test for it's existance)
+* [ ] Test that the Loading component displays when null is passed into the show prop (look at the Loading component to see how to test for it's existence)
 * [ ] Test that when your test data is passed through the show prop, the same number of season select options appear as there are seasons within your test data.
 * [ ] Test that when an item is selected, the handleSelect function is called. Look at your code to see how to get access to the select DOM element and userEvent reference materials to see how to trigger a selection.
 * [ ] Test that the episode component DOES NOT render when the selectedSeason props is "none" and DOES render the episode component when the selectedSeason prop has a valid season index.
