@@ -21,11 +21,16 @@ test('renders testShow and no selected Season without errors', ()=>{
 });
 
 test('renders Loading component when prop show is null', () => {
+    render(<Show show={null} selectedSeason={'none'} />)
+    const loading = screen.queryByTestId('loading-container');
+    expect(loading).toBeInTheDocument();
 });
 
 test('renders same number of options seasons are passed in', ()=>{
+    render(<Show show={testShow} selectedSeason={'none'} />)
+    const seasonOptions = screen.queryAllByTestId('season-option')
+    expect(seasonOptions).toHaveLength(4);
 });
-
 test('handleSelect is called when an season is selected', () => {
 });
 
