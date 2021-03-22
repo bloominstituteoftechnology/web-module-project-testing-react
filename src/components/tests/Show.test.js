@@ -5,10 +5,19 @@ import userEvent from '@testing-library/user-event';
 import Show from './../Show';
 
 const testShow = {
-    //add in approprate test data structure here.
+        name: 'Full House',
+        image: 'https://m.media-amazon.com/images/M/MV5BN2VhZjA4ZGMtMTM0ZC00MTIyLWFjMzMtOWI4Y2JjN2IyNmYyXkEyXkFqcGdeQXVyNjc4NTExMTk@._V1_UY1200_CR93,0,630,1200_AL_.jpg',
+        summary: 'summary of the awesome show!',
+        seasons: [
+            {id:0, name: "Season 1", episodes: []}, 
+            {id:1, name: "Season 2", episodes: []}, 
+            {id:2, name: "Season 3", episodes: []}, 
+            {id:3, name: "Season 4", episodes: []}
+          ]
 }
 
 test('renders testShow and no selected Season without errors', ()=>{
+    render(<Show show={testShow} selectedSeason={"none"}/>)
 });
 
 test('renders Loading component when prop show is null', () => {
