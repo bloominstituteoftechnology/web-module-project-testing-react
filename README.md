@@ -13,7 +13,7 @@ As a developer, you will often be asked to write tests for the feature you are b
 
 Get the project fired up and start using it as a user would. Try to go through the user sequences for this feature that you think users would go through. Once you have those in mind, you will have an idea of what to test in your application.
 
-![Stranger Example](project-example.gif)
+![Stranger Example](project_example.gif)
 
 ***Make sure to complete your tasks one at a time and complete test each task before proceeding forward.***
 
