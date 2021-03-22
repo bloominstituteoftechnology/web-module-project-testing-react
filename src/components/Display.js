@@ -15,7 +15,7 @@ const Display = (props) => {
             setShow(data);
 
             if (displayFunc) {
-                displayFunc();
+                displayFunc(data);
             }
 
         });
