@@ -45,12 +45,12 @@ test('component renders when no seasons are selected and when rerenders with a s
     const mockSeasonSelect = jest.fn();
     
     const {rerender} = render(<Show handleSelect={mockSeasonSelect} show={testShow} selectedSeason={'none'} />)
-    const show = screen.getByTestId('show-container')
-    expect(show).toBeInTheDocument();
+    let episodes = screen.queryByTestId('episodes-container')
+    expect(episodes).not.toBeInTheDocument();
 
     // test that tests whether episode is rendered when season selected
     rerender(<Show handleSelect={mockSeasonSelect} show={testShow} selectedSeason={2} />)
-    const episodes = screen.getByTestId('episodes-container')
+    episodes = screen.queryByTestId('episodes-container')
     expect(episodes).toBeInTheDocument();
 });
 
