@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { getByTestId, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import Show from './../Show';
@@ -31,10 +31,27 @@ test('renders same number of options seasons are passed in', ()=>{
     const seasonOptions = screen.queryAllByTestId('season-option')
     expect(seasonOptions).toHaveLength(4);
 });
+
 test('handleSelect is called when an season is selected', () => {
+    const mockSeasonSelect = jest.fn();
+
+    render(<Show handleSelect={mockSeasonSelect} show={testShow} selectedSeason={'none'} />)
+    userEvent.selectOptions(screen.getByLabelText('Select A Season'), ['1'])
+    expect(mockSeasonSelect).toHaveBeenCalled();
 });
 
 test('component renders when no seasons are selected and when rerenders with a season passed in', () => {
+    //test that no episodes show when no seasons are selected 
+    const mockSeasonSelect = jest.fn();
+    
+    const {rerender} = render(<Show handleSelect={mockSeasonSelect} show={testShow} selectedSeason={'none'} />)
+    const show = screen.getByTestId('show-container')
+    expect(show).toBeInTheDocument();
+
+    // test that tests whether episode is rendered when season selected
+    rerender(<Show handleSelect={mockSeasonSelect} show={testShow} selectedSeason={2} />)
+    const episodes = screen.getByTestId('episodes-container')
+    expect(episodes).toBeInTheDocument();
 });
 
 //Tasks:
