@@ -1,9 +1,50 @@
+import React from 'react'
+import { screen, render } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+
+import Display from '../Display'
+
+const testSeasons = [
+    {
+        id: 0,
+        name: "Season 1",
+        episodes: []
+    },
+    {
+        id: 1,
+        name: "Season 2",
+        episodes: []
+    },
+]
+
+const testEmptySeasons = [{}]
+
+test('sanity check', () => {
+    render(<Display />)
+})
+
+test('fetch button pressed, components show', async () => {
+    render(<Display />)
+
+    const fetchButton = screen.getByRole('button')
+    userEvent.click(fetchButton)
+
+    const showSeason = await screen.findAllByTestId('season-option')
+    expect(showSeason).toBeInTheDocument
+})
+
+test('fetch button pressed showed correct amount of select options', async () => {
+    render(<Display />)
+})
 
 
 
 
 
 
+test('optional func prop is called when fetch is pressed', () => {
+    render(<Display />)
+})
 
 
 
