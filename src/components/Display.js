@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Loading from "./Loading";
 import Show from "./Show";
 
-import {fetchShow} from '../api/fetchShow';
+import fetchShow from '../api/fetchShow';
 
 const Display = (props) => {
     const [show, setShow] = useState(null);

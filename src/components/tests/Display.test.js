@@ -1,45 +1,52 @@
 import React from 'react';
-import { screen, render } from '@testing-library/react';
+import { screen, render, waitFor } from '@testing-library/react';
 import Display from '../Display';
 
-import {fetchShow as mockFetchShow} from '../../api/fetchShow';
+import fetchShow, {fetchShow as mockFetchShow} from '../../api/fetchShow';
 jest.mock('../../api/fetchShow')
 
 import userEvent from '@testing-library/user-event';
 
-// const testShow = {
-//     //add in approprate test data structure here.
-//         name: 'name',
-//         summary: 'words',
-//         seasons: [
-//             {
-//                 id: 1,
-//                 name: 'name',
-//                 episodes: [],
-//             }],
-// };
+ const testShow = {
+    name: 'name',
+    summary: 'words',
+    seasons: [
+        {id:0, name: "Season 1", episodes: []}, 
+        {id:1, name: "Season 2", episodes: []}, 
+        {id:2, name: "Season 3", episodes: []}, 
+        {id:3, name: "Season 4", episodes: []}
+    ]
+};
 
 test("display component renders", () => {
     render(<Display/>)
 })
 
 test("test button fetch", async ()=> {
+    render(<Display />)
+
+    fetchShow.mockResolvedValueOnce(testShow);
+
+    const button = screen.getByRole('button')
+    userEvent.click(button);
+
+    const showComponent = await screen.findByTestId("show-container")
+    await waitFor(() => expect(showComponent).toBeTruthy())
+});
+
+test("Fetch button is pressed", async () => {
 
     render(<Display />)
 
-    mockFetchShow.mockResolvedValueOnce({
-        data: [
-            {id:0, name: "Season 1", episodes: []}, 
-            {id:1, name: "Season 2", episodes: []}, 
-            {id:2, name: "Season 3", episodes: []}, 
-            {id:3, name: "Season 4", episodes: []}
-          ]
-    })
+    fetchShow.mockResolvedValueOnce(testShow);
 
-    const button = screen.getByRole('button')
-    userEvent.click(button)
+    const button = screen.getByRole('button');
+    userEvent.click(button);
 
-//     const showComponent = await screen.getByTestId()
+    const seasonLength = testShow.seasons.length;
+    const options = await screen.findAllByTestId("season-option");
+
+    await waitFor(() => expect(options).toHaveLength(seasonLength));
 })
 
 
