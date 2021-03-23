@@ -1,23 +1,57 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { getAllByTestId, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import Show from './../Show';
 
 const testShow = {
     //add in approprate test data structure here.
-}
+        name: 'name',
+        summary: 'words',
+        seasons: [
+            {
+                id: 1,
+                name: 'name',
+                epidodes: [],
+            }],
+};
 
 test('renders testShow and no selected Season without errors', ()=>{
+    render(<Show show={testShow} selectedSeason={'none'} />);
 });
 
 test('renders Loading component when prop show is null', () => {
+    //<h2 data-testid="loading-container">Fetching data...</h2>
+    render(<Show show={null} selectedSeason='none' />);
+
+    const loading = screen.queryByTestId("loading-container");
+
+    expect(loading).toBeInTheDocument();
+    expect(loading).toBeTruthy();
+    expect(loading).toHaveTextContent('Fetching data...')
 });
 
-test('renders same number of options seasons are passed in', ()=>{
+test('renders same number of options seasons are passed in', async ()=>{
+    //<option data-testid="season-option" key={season.id} value={season.id}>{season.name}</option>
+    render(<Show show={testShow} selectedSeason={'none'} />);
+
+    const showSelector = screen.queryByLabelText('Select A Season');
+    const showOptions = screen.getAllByTestId("season-option");
+
+    expect(showSelector).toHaveLength(showOptions.length +1);
+
 });
 
 test('handleSelect is called when an season is selected', () => {
+    const mockHandleSelect = jest.fn();
+
+    render(<Show show={testShow} selectedSeason={'none'}  handleSelect={mockHandleSelect} />);
+
+    const showOptions = screen.getAllByTestId("season-option");
+
+    userEvent.selectOptions(showOptions[1]);
+
+    expect(mockHandleSelect).toHaveBeenCalled();
 });
 
 test('component renders when no seasons are selected and when rerenders with a season passed in', () => {

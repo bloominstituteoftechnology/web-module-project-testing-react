@@ -16,6 +16,7 @@ const testEpisodeWithoutImage = {
     //Add in approprate test data structure here.
     id: 1,
     name:'',
+    image: null,
     season: 1,
     number:1,
     summary:'Hi yall', 
@@ -36,10 +37,16 @@ test("renders the summury test passed as prop", ()=>{
     //assert
     expect(summary).toBeInTheDocument();
     expect(summary).not.toBeNull();
+    expect(summary).toBeTruthy();
     
 });
 
 test("renders default image when image is not defined", ()=>{
+    render(<Episode episode={testEpisodeWithoutImage} />);
+
+    const defaultURL = './stranger_things.png';
+
+    expect(defaultURL).toBeTruthy();
     
 })
 
