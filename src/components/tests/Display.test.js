@@ -1,15 +1,46 @@
+import React from 'react';
+import { screen, render } from '@testing-library/react';
+import Display from '../Display';
 
+import {fetchShow as mockFetchShow} from '../../api/fetchShow';
+jest.mock('../../api/fetchShow')
 
+import userEvent from '@testing-library/user-event';
 
+// const testShow = {
+//     //add in approprate test data structure here.
+//         name: 'name',
+//         summary: 'words',
+//         seasons: [
+//             {
+//                 id: 1,
+//                 name: 'name',
+//                 episodes: [],
+//             }],
+// };
 
+test("display component renders", () => {
+    render(<Display/>)
+})
 
+test("test button fetch", async ()=> {
 
+    render(<Display />)
 
+    mockFetchShow.mockResolvedValueOnce({
+        data: [
+            {id:0, name: "Season 1", episodes: []}, 
+            {id:1, name: "Season 2", episodes: []}, 
+            {id:2, name: "Season 3", episodes: []}, 
+            {id:3, name: "Season 4", episodes: []}
+          ]
+    })
 
+    const button = screen.getByRole('button')
+    userEvent.click(button)
 
-
-
-
+//     const showComponent = await screen.getByTestId()
+})
 
 
 

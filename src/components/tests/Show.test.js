@@ -1,5 +1,5 @@
 import React from 'react';
-import { getAllByTestId, render, screen } from '@testing-library/react';
+import { fireEvent, getAllByTestId, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import Show from './../Show';
@@ -12,7 +12,7 @@ const testShow = {
             {
                 id: 1,
                 name: 'name',
-                epidodes: [],
+                episodes: [],
             }],
 };
 
@@ -22,7 +22,7 @@ test('renders testShow and no selected Season without errors', ()=>{
 
 test('renders Loading component when prop show is null', () => {
     //<h2 data-testid="loading-container">Fetching data...</h2>
-    render(<Show show={null} selectedSeason='none' />);
+    render(<Show show={null} selectedSeason={'none'} />);
 
     const loading = screen.queryByTestId("loading-container");
 
@@ -48,13 +48,25 @@ test('handleSelect is called when an season is selected', () => {
     render(<Show show={testShow} selectedSeason={'none'}  handleSelect={mockHandleSelect} />);
 
     const showOptions = screen.getAllByTestId("season-option");
+    const showSelector = screen.getByLabelText('Select A Season');
 
-    userEvent.selectOptions(showOptions[1]);
+    userEvent.selectOptions(showSelector, showOptions[0]);
 
     expect(mockHandleSelect).toHaveBeenCalled();
 });
 
 test('component renders when no seasons are selected and when rerenders with a season passed in', () => {
+    // <div data-testid="episodes-container" className="episodes">
+    const {rerender} = render (<Show show={testShow} selectedSeason={'none'}  />)
+
+    let episodesContainer = screen.queryByTestId("episodes-container")
+    expect(episodesContainer).not.toBeInTheDocument();
+
+    rerender(<Show show={testShow} selectedSeason={0} />)
+    episodesContainer = screen.queryByTestId("episodes-container")
+    expect(episodesContainer).toBeTruthy();
+    expect(episodesContainer).toBeInTheDocument();
+
 });
 
 //Tasks:
