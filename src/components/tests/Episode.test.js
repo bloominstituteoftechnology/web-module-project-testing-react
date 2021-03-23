@@ -1,31 +1,47 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import Episode from './../Episode';
-
+import { getByRole, render, screen } from '@testing-library/react';
+import Episode from '../Episode';
+import defaultPic from '../../../public/stranger_things.png'
 const testEpisode = {
-    id:1,
+    id: 1,
     name: "",
     image: "http://static.tvmaze.com/uploads/images/medium_landscape/67/168918.jpg",
     season: 1,
     number: 1,
-    summary: "",
+    summary: "hello test data",
     runtime: 1
 }
 
 const testEpisodeWithoutImage = {
-    //Add in approprate test data structure here.
+    id: 1,
+    name: "",
+    image: `${defaultPic}`,
+    season: 1,
+    number: 1,
+    summary: 'Hi yall',
+    runtime: 1
 }
 
 test("renders without error", () => {
+    render(<Episode episode={testEpisode} />);
+});
+
+test("renders the summury test passed as prop", () => {
+    // const { rerender } = 
+    render(<Episode episode={testEpisode} />);
+    const testSum = screen.queryByText('hello test data')
+    expect(testSum).toBeInTheDocument();
+    expect(testSum).not.toBeNull();
+    expect(testSum).toBeTruthy();
+    // expect(testSum)
+
 
 });
 
-test("renders the summury test passed as prop", ()=>{
-    
-});
-
-test("renders default image when image is not defined", ()=>{
-    
+test("renders default image when image is not defined", () => {
+    render(<Episode episode={testEpisodeWithoutImage} />)
+    const pic = screen.getByAltText('stranger_things.png');
+    expect(pic.alt).toBe('stranger_things.png')
 })
 
 //Tasks
