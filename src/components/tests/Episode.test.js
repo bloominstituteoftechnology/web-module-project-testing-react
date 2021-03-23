@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { queryByText, render, screen } from '@testing-library/react';
 import Episode from './../Episode';
 
 const testEpisode = {
@@ -8,24 +8,41 @@ const testEpisode = {
     image: "http://static.tvmaze.com/uploads/images/medium_landscape/67/168918.jpg",
     season: 1,
     number: 1,
-    summary: "",
+    summary: "hello world",
     runtime: 1
 }
 
 const testEpisodeWithoutImage = {
-    //Add in approprate test data structure here.
+    //Add in appropriate test data structure here.
+    id:1,
+    name: "",
+    season: 1,
+    image:null,
+    number: 1,
+    summary: "hello world",
+    runtime: 1
 }
 
 test("renders without error", () => {
-
+    render(<Episode episode={testEpisode}/>)
 });
 
-test("renders the summury test passed as prop", ()=>{
-    
+test("renders the summary test passed as prop", ()=>{
+    render(<Episode episode={testEpisode}/>)
+ 
+    const summary = screen.queryByText("hello world");
+    expect(summary).toBeInTheDocument();
+    expect(summary).toHaveTextContent('hello world');
+    expect(summary).not.toBeNull()
 });
 
 test("renders default image when image is not defined", ()=>{
-    
+    render(<Episode episode={testEpisodeWithoutImage}/>)
+
+    const image = screen.getByRole('img')
+    expect(image).toHaveAttribute('alt', './stranger_things.png')
+    expect(image).toHaveAttribute('src', './stranger_things.png')
+
 })
 
 //Tasks
