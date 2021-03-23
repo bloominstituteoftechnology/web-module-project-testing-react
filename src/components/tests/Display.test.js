@@ -1,8 +1,11 @@
+//1. Add in nessisary imports and values to establish the testing suite.
 
+import React from 'react';
+import { screen, render } from '@testing-library/react';
+import Display from './../Display';
 
-
-
-
+//2. Test that the Display component renders without any passed in props.
+test()
 
 
 
