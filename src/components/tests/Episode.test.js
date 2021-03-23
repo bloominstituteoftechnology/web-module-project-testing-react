@@ -1,32 +1,38 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import Episode from './../Episode';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import Episode from "./../Episode";
 
 const testEpisode = {
-    id:1,
-    name: "",
-    image: "http://static.tvmaze.com/uploads/images/medium_landscape/67/168918.jpg",
-    season: 1,
-    number: 1,
-    summary: "",
-    runtime: 1
-}
+  id: 1,
+  name: "",
+  image: null,
+  season: 1,
+  number: 1,
+  summary: "This is a cool ass movie film waa wha wee waa",
+  runtime: 1,
+};
 
 const testEpisodeWithoutImage = {
-    //Add in approprate test data structure here.
-}
+  //Add in approprate test data structure here.
+};
 
 test("renders without error", () => {
-
+  render(<Episode episode={testEpisode} />);
+  const movieSummary = screen.queryByText(
+    "This is a cool ass movie film waa wha wee waa"
+  );
+  expect(movieSummary).toBeInTheDocument();
+  expect(movieSummary).not.toBeNull();
+  expect(movieSummary).not.toBeFalsy();
 });
 
-test("renders the summury test passed as prop", ()=>{
-    
-});
+test("renders the summury test passed as prop", () => {});
 
-test("renders default image when image is not defined", ()=>{
-    
-})
+test("renders default image when image is not defined", () => {
+  render(<Episode episode={testEpisode} />);
+  const photoAltTage = screen.queryByAltText("./stranger_things.png");
+  expect(photoAltTage).toBeInTheDocument();
+});
 
 //Tasks
 //1. Complete a test that shows the Episode component renders. Pass in the provided example episode data as a test prop.
