@@ -8,23 +8,45 @@ const testEpisode = {
     image: "http://static.tvmaze.com/uploads/images/medium_landscape/67/168918.jpg",
     season: 1,
     number: 1,
-    summary: "",
+    summary: "A young boy mysteriously disappears, and his panicked mother demands that the police find him. Meanwhile, the boy's friends conduct their own search, and meet a mysterious girl in the forest.",
     runtime: 1
 }
 
 const testEpisodeWithoutImage = {
-    //Add in approprate test data structure here.
+    //Add in appropriate test data structure here.
+    id:1,
+    name: "",
+    image: null,
+    season: 1,
+    number: 1,
+    summary: "",
+    runtime: 1
 }
 
 test("renders without error", () => {
-
+    render(<Episode testEpisode={testEpisode}/>)
 });
 
-test("renders the summury test passed as prop", ()=>{
+test("renders the summary test passed as prop", ()=>{
+    //Arrange
+    render(<Episode testEpisode={testEpisode}/>)
     
+    //Act
+    const sum = screen.getByText('A young boy mysteriously disappears')
+    
+    //Assert
+    expect(sum).toHaveTextContent('A young boy mysteriously disappears')
+    expect(sum).toBeTruthy()
+    expect(sum).toBeInTheDocument()
 });
+
 
 test("renders default image when image is not defined", ()=>{
+    render(<Episode noImage={testEpisodeWithoutImage}/>)
+
+    const altPic = screen.getByAltText('./stranger_things.png')
+
+    expect(altPic).toBeTruthy()
     
 })
 
