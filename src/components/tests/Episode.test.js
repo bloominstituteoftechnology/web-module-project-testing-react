@@ -5,7 +5,7 @@ import Episode from './../Episode';
 const testEpisode = {
     id:1,
     name: "",
-    image: "http://static.tvmaze.com/uploads/images/medium_landscape/67/168918.jpg",
+    image: null,
     season: 1,
     number: 1,
     summary: "",
@@ -17,10 +17,18 @@ const testEpisodeWithoutImage = {
 }
 
 test("renders without error", () => {
-
+    render(<Episode episode={testEpisode}/>);
+    const summary = screen.queryByText(/test summary/i);
+    console.log(summary);
+    expect(summary).toBeInTheDocument();
+    expect(summary).toBeTruthy();
+    expect(summary).toHaveTextContent("test summary");
 });
 
 test("renders the summury test passed as prop", ()=>{
+    render(<Episode episode={testEpisodeWithoutImage}/>);
+        const image = screen.queryByAltText('./stranger_things.png');
+        expect(image).toBeInTheDocument();
     
 });
 
