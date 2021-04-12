@@ -3,24 +3,48 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import Show from './../Show';
+import Episode from '../Episode';
 
 const testShow = {
     //add in approprate test data structure here.
+    name: "",
+    summary: "",
+    seasons: [
+       {id: 0, name: "Season 1", episodes:[{id: 553946, url: "https://www.tvmaze.com/episodes/553946/stranger-things-1x01-chapter-one-the-vanishing-of-will-byers", name: "Chapter One: The Vanishing of Will Byers", season: 1, number: 1}]}
+    ],
 }
 
 test('renders testShow and no selected Season without errors', ()=>{
+    render(<Show show={testShow} selectedSeason="none"/>)
 });
 
 test('renders Loading component when prop show is null', () => {
+    render(<Show show={null} selectedSeason='none'/>)
 });
 
 test('renders same number of options seasons are passed in', ()=>{
+    render(<Show show={testShow} selectedSeason='none'/>);
+    const seasons = screen.getAllByText(/season/i);
+    expect(seasons).toHaveLength(2);
 });
 
 test('handleSelect is called when an season is selected', () => {
+    const mockGetData = jest.fn(() => { })
+    render(<Show show={testShow} selectedSeason="none"/>);
+    const seasons = screen.getAllByText(/season/i);
+    expect(seasons).toHaveLength(2);
+    userEvent.click(seasons[1]);
+    expect(mockGetData.mock.calls).toEqual([]);
 });
 
 test('component renders when no seasons are selected and when rerenders with a season passed in', () => {
+    const { rerender } = render(<Show show={null} selectedSeason="none"/>)
+    const seasons = screen.getAllByText(/fetching data/i);
+
+    rerender(<Show show={testShow} selectedSeason={0} />);
+    expect(seasons).toHaveLength(1);
+    render(<Show show={testShow} selectedSeason={0}/>);
+
 });
 
 //Tasks:
