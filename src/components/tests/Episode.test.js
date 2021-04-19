@@ -9,7 +9,7 @@ const testEpisode = {
     image: "http://static.tvmaze.com/uploads/images/medium_landscape/67/168918.jpg",
     season: 1,
     number: 1,
-    summary: "",
+    summary: "Oodles of noodles for poodles.",
     runtime: 1
 }
 
@@ -22,7 +22,12 @@ test("renders without error", () => {
 });
 
 test("renders the summury test passed as prop", ()=>{
-    
+    // Rendering episode with testEpisode
+    render(<Episode episode={testEpisode} />);
+
+    // Test to see if data is there
+    // Pull the summary data
+    expect(screen.queryByText(/Oodles of noodles for poodles./i)).toBeInTheDocument();
 });
 
 test("renders default image when image is not defined", ()=>{
