@@ -4,28 +4,49 @@ import Episode from './../Episode';
 
 const testEpisode = {
     id:1,
-    name: "",
+    name: "A Bad Movie",
     image: "http://static.tvmaze.com/uploads/images/medium_landscape/67/168918.jpg",
     season: 1,
     number: 1,
-    summary: "",
+    summary: "A really exceptional film",
     runtime: 1
 }
 
 const testEpisodeWithoutImage = {
-    //Add in approprate test data structure here.
+    id:1,
+    name: "A Good Movie",
+    image: null,
+    season: 1,
+    number: 1,
+    summary: "Good movie.",
+    runtime: 1
 }
 
 test("renders without error", () => {
+    
+    render(<Episode episode={testEpisode}/>)
 
 });
 
 test("renders the summury test passed as prop", ()=>{
     
+    render(<Episode episode={testEpisode}/>);
+    
+    const summury = screen.getByText(/a really exceptional film/i);
+    
+    expect(summury).toBeInTheDocument();
+    expect(summury).toBeTruthy();
+
 });
 
 test("renders default image when image is not defined", ()=>{
     
+    render(<Episode episode={testEpisodeWithoutImage}/>);
+
+    const img = screen.getByAltText('./stranger_things.png');
+
+    expect(img).toBeInTheDocument();
+
 })
 
 //Tasks
