@@ -1,4 +1,14 @@
 
+import React from "react";
+import { fireEvent, screen, render, waitFor } from "@testing-library/react"
+import Display from "../Display";
+test( "test that the Display component renders without any passed in props", () => {
+    render(<Display/>)
+})
+const mockData =
+test("show test data element", () => {
+    const { rerender } = render(<Display show = {[]} />);
+})
 
 
 
