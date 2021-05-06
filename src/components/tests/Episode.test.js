@@ -14,18 +14,32 @@ const testEpisode = {
 
 const testEpisodeWithoutImage = {
     //Add in approprate test data structure here.
+    id:1,
+    name:'',
+    image:null,
+    season:1,
+    number:1,
+    summary:'',
+    runtime:1
 }
 
 test("renders without error", () => {
+    render(<Episode episode={testEpisode}/>);
 
 });
 
 test("renders the summury test passed as prop", ()=>{
+    let anEpisodeImage = document.getElementsByClassName('episode-image')
+    let anEpisodeSeason = document.getElementsByClassName('episode-number');
+    let anEpisodeRuntime = document.getElementsByClassName('episode-runtime');
+    expect(anEpisodeRuntime).toBeDefined();
+    expect(anEpisodeImage).toBeDefined();
+    expect(anEpisodeSeason).toBeDefined();
     
 });
 
 test("renders default image when image is not defined", ()=>{
-    
+    render(<Episode episode={testEpisodeWithoutImage}/>)
 })
 
 //Tasks
