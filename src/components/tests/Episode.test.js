@@ -8,7 +8,7 @@ const testEpisode = {
     image: "http://static.tvmaze.com/uploads/images/medium_landscape/67/168918.jpg",
     season: 1,
     number: 1,
-    summary: "",
+    summary: "ohhhhh",
     runtime: 1
 }
 
@@ -29,6 +29,9 @@ test("renders without error", () => {
 });
 
 test("renders the summury test passed as prop", ()=>{
+    render(<Episode test = {testEpisode}/>)
+
+    
     
 });
 

@@ -5,10 +5,14 @@ import userEvent from '@testing-library/user-event';
 import Show from './../Show';
 
 const testShow = {
+    name: 'mike',
+    summary: 'about the number one knucklehead  ninja',
+    seasons: 'm'
     //add in approprate test data structure here.
 }
 
 test('renders testShow and no selected Season without errors', ()=>{
+
 });
 
 test('renders Loading component when prop show is null', () => {
@@ -29,4 +33,4 @@ test('component renders when no seasons are selected and when rerenders with a s
 //3. Test that the Loading component displays when null is passed into the show prop (look at the Loading component to see how to test for it's existance)
 //4. Test that when your test data is passed through the show prop, the same number of season select options appears as there are seasons in your test data.
 //5. Test that when an item is selected, the handleSelect function is called. Look at your code to see how to get access to the select Dom element and userEvent reference materials to see how to trigger a selection.
-//6. Test that the episode component DOES NOT render when the selectedSeason props is "none" and DOES render the episode component when the selectedSeason prop has a valid season index.
+//6. Test that the episode component DOES NOT render when the selectedSeason props is "none" and DOES render the episode compoz
