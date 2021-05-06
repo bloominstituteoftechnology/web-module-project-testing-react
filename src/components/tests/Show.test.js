@@ -5,22 +5,72 @@ import userEvent from '@testing-library/user-event';
 import Show from './../Show';
 
 const testShow = {
-    //add in approprate test data structure here.
+    image: null,
+    name: "show",
+    seasons: [
+        {
+            episodes:[],
+            id: 1,
+            name: "season1"
+
+        },
+        {
+            episodes:[],
+            id: 2,
+            name: "season2"
+
+        }
+    ], 
+    summary: "summary"
+
 }
 
 test('renders testShow and no selected Season without errors', ()=>{
+   //Arrange
+    render(<Show show={testShow} selectedSeason={"none"}/>);
 });
 
 test('renders Loading component when prop show is null', () => {
-});
+    render(<Show show={null}/>)
+    const loading = screen.getByTestId("loading-container");
 
+    expect(loading).toBeVisible();
+
+});
+//Test that when your test data is passed through the show prop, the same number of season select options appears as there are seasons in your test data.
 test('renders same number of options seasons are passed in', ()=>{
+    render(<Show show={testShow} selectedSeason={"none"}/>);
+    const seasonsOptions = screen.getAllByTestId("season-option"); //getAll - returns an array
+    expect(seasonsOptions).toHaveLength(2);
 });
 
 test('handleSelect is called when an season is selected', () => {
+    const mockHandleSelect = jest.fn() //create the mock function declared before rendering the component
+    //Arrange
+    render(<Show show={testShow} selectedSeason={'none'} handleSelect={mockHandleSelect}/>);
+    const selectingSeason = screen.getByLabelText('Select A Season');//because it's the label text, the program knows it's associated with the drop down menu
+
+    userEvent.selectOptions(selectingSeason, ['1']);
+    //selectOptions - for drop down menu options, when in the component you see 'select' tag
+
+    expect(mockHandleSelect).toHaveBeenCalledTimes(1); 
+
+    //
 });
 
 test('component renders when no seasons are selected and when rerenders with a season passed in', () => {
+    const { rerender } = render(<Show show={testShow} selectedSeason={'none'}/>);
+    let episodeComponent = screen.queryAllByTestId('episodes-container');
+    expect(episodeComponent).toHaveLength(0);
+    //no season was selected, so no episodes - 0
+    
+    rerender(<Show show={testShow} selectedSeason={1}/>);
+    episodeComponent = screen.getAllByTestId('episodes-container');//only use query when you're not expecting something
+    expect(episodeComponent).toHaveLength(1);
+    //season 1 selected - in our test data above - so, because empty array has a length of 1
+
+
+
 });
 
 //Tasks:
