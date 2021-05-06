@@ -1,6 +1,53 @@
+import React from 'react';
+import { render, screen, waitFor} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
+import Display from './../Display.js';
 
+const testShow = {
+    name:"phineas and ferb",
+    summmary:"two brothers goofin off",
+    seasons:[
+        {id:0, name: "Season 1", episodes: []}
+    ]
+}
 
+const displayFunc = (data)=> {
+    console.log(data);
+}
+
+test('renders without any props', ()=>{
+    render(<Display />)
+});
+
+test('test show component showing', ()=>{
+    render(<Display displayFun={displayFunc}/>)
+
+    const button = screen.getByRole("button");
+    userEvent.click(button)
+
+    const show = screen.queryByTestId('show-container');
+    waitFor(() => expect(show).toBeInTheDocument());
+});
+
+test('test if options rendered equals seasons', ()=>{
+    render(<Display show={testShow} />);
+    
+    const button = screen.getByRole('button');
+    userEvent.click(button);
+
+    waitFor(() => expect(screen.getAllByTestId('season-option')).toHaveLength(testShow.seasons.length));
+});
+
+test('test if optional function is being called', ()=>{
+    const fakeClick = jest.fn();
+    render(<Display handleClick={fakeClick}/>);
+
+    const button = screen.getByRole('button');
+    userEvent.click(button);
+    
+    waitFor(() => expect(fakeClick).toHaveBeenCalledTimes(1))
+});
 
 
 
