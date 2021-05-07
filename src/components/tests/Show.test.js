@@ -1,26 +1,83 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import {fireEvent, screen, render} from "@testing-library/react"
 import userEvent from '@testing-library/user-event';
 
 import Show from './../Show';
+import Episode from '../Episode';
 
+
+const testEpisodeWithoutImage = {
+    
+    id:1,
+    name:'Chapter One: The Vanishing of Will Byers',
+    image:null,
+    season:1,
+    number:1,
+    summary:'A young boy mysteriously disappears, and his panicked mother demands that the police find him. Meanwhile, the boys friends conduct their own search, and meet a mysterious girl in the forest.',
+    runtime:1
+}
+
+const testEpisodeWithoutImageAndSeason = {
+    
+    id:1,
+    name:'Chapter One: The Vanishing of Will Byers',
+    image:null,
+    season:null,
+    number:1,
+    summary:'A young boy mysteriously disappears, and his panicked mother demands that the police find him. Meanwhile, the boys friends conduct their own search, and meet a mysterious girl in the forest.',
+    runtime:1
+}
 const testShow = {
     //add in approprate test data structure here.
+    name: "Stranger Things",
+    summary: 'A love letter to the 80s classics that captivated a generation, Stranger Things is set in 1983 Indiana, where a young boy vanishes into thin air. As friends, family and local police search for answers, they are drawn into an extraordinary mystery involving top-secret government experiments, terrifying supernatural forces and one very strange little girl.',
+    seasons:[
+        {id:0, name: "Season 1", episodes: []}, 
+        {id:1, name: "Season 2", episodes: []}, 
+        {id:2, name: "Season 3", episodes: []}, 
+        {id:3, name: "Season 4", episodes: []}
+      ]
 }
 
 test('renders testShow and no selected Season without errors', ()=>{
+    render(<Show show={testShow} selectedSeason={'none'}/>)
 });
 
 test('renders Loading component when prop show is null', () => {
+    render(<Show show={null}/>)    
+
+    const message = screen.queryByText(/Fetching data.../i);
+    expect(message).toBeDefined();
+    
 });
 
 test('renders same number of options seasons are passed in', ()=>{
+     render(<Show show={testShow} selectedSeason={'none'}/> )
+
+    let renderedShow = document.getElementById("seasons");
+    expect(renderedShow).toBeDefined()
 });
 
 test('handleSelect is called when an season is selected', () => {
+    const mockAction = jest.fn();
+    render(<Show show={testShow} selectedSeason={'none'} handleSelect={mockAction}/>)
+    const dropDown = screen.getByRole("combobox");
+    fireEvent.click(dropDown);
+
+    
+    
+    expect(mockAction.mock.calls).toHaveLength(0); 
+
 });
 
 test('component renders when no seasons are selected and when rerenders with a season passed in', () => {
+const {rerender} = render(<Episode episode={testEpisodeWithoutImage}/>) // With season passed in
+rerender(<Episode episode={testEpisodeWithoutImageAndSeason}/>)   // No Season passed in.
+
+
+ 
+ 
+
 });
 
 //Tasks:
