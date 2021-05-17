@@ -9,7 +9,7 @@ const testEpisode = {
     "http://static.tvmaze.com/uploads/images/medium_landscape/67/168918.jpg",
   season: 1,
   number: 1,
-  summary: "",
+  summary: "What a great show.",
   runtime: 1,
 };
 
@@ -21,7 +21,15 @@ test("renders without error", () => {
   render(<Episode episode={[]} />);
 });
 
-test("renders the summury test passed as prop", () => {});
+test("renders the summury test passed as prop", () => {
+  render(<Episode episode={testEpisode} />);
+
+  const summary = screen.queryByText(`${testEpisode.summary}`);
+
+  expect(summary).toBeInTheDocument();
+  expect(summary).toBeTruthy();
+  expect(summary).not.toBeNull();
+});
 
 test("renders default image when image is not defined", () => {});
 
