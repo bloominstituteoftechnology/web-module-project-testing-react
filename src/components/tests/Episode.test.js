@@ -13,6 +13,16 @@ const testEpisode = {
   runtime: 1,
 };
 
+const testData = {
+  id: 1,
+  name: "",
+  image: null,
+  season: 1,
+  number: 1,
+  summary: "What a great show.",
+  runtime: 1,
+};
+
 const testEpisodeWithoutImage = {
   //Add in approprate test data structure here.
 };
@@ -31,7 +41,13 @@ test("renders the summury test passed as prop", () => {
   expect(summary).not.toBeNull();
 });
 
-test("renders default image when image is not defined", () => {});
+test("renders default image when image is not defined", () => {
+  render(<Episode episode={testData} />);
+
+  const img = screen.getByTestId("img");
+
+  expect(img).toHaveAttribute("alt", "./stranger_things.png");
+});
 
 //Tasks
 //1. Complete a test that shows the Episode component renders. Pass in the provided example episode data as a test prop.
