@@ -1,10 +1,53 @@
+import React from 'react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
+import Display from '../Display'
 
+const testShow = {
+    name: "Spongebob",
+    summary:"A sponge in the water",
+    seasons:[
+        {id:0, name:"Season 1", episodes: []}
+    ]
+}
 
+const displayDummyFunc = (data) =>{
+    console.log(data);
+}
 
+test('display renders without errors', () => {
+    render(<Display/>)
+})
 
+test('fetch button press render', () => {
+    render(<Display displayFunc = {displayDummyFunc}/>)
 
+    const button = screen.getByRole('button');
+    userEvent.click(button);
 
+    const show = screen.queryByTestId('show-container');
+    waitFor(()=> expect(show).toBeInTheDocument());
+});
+
+test('fetch renders equals seasons',()=>{
+    render (<Display show = {testShow}/>);
+
+    const button = screen.getByRole('button');
+    userEvent.click(button);
+
+    waitFor(()=> expect(screen.getAllByTestId('season-option')).toHaveLength(testShow.seasons.length));
+});
+
+test('optional function is called', ()=>{
+    const fakeClick = jest.fn();
+    render(<Display handleClick = {fakeClick}/>);
+
+    const button = screen.getByRole('button');
+    userEvent.click(button);
+
+    waitFor(()=> expect(fakeClick).toHaveBeenCalledTimes(1));
+});
 
 
 
