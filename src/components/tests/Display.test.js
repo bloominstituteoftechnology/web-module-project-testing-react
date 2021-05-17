@@ -1,14 +1,36 @@
+import React from 'react';
+import { findAllByTestId, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
+import Display from './Display';
+
+test("renders without error", ()=>{
+    render(<Display/>);
+    const seasons = screen.queryAllByTestId('season-option');
+    expect(seasons).toHaveLength(3);
+});
 
 
+test('handleSelect is called when a season is selected', ()=>{
+    const handleSelect = jest.fn();
 
+    render(<Show show={testShow} handleSelect={handleSelect} selectedSeason='none'/>);
 
+    const selector = screen.getByRole('combobox');
+    const seasons = screen.queryAllByTestId('season-option');
 
+    userEvent.click(selector);
+    userEvent.click(seasons[1]);
 
+    expect(handleSelect).toBeCalledTimes(1);
+    expect(handleSelect.mock.calls.length === 1).toBeTruthy();
+    expect(handleSelect.mock.calls.length).toBe(1);
+    expect(handleSelect.mock.calls).toHaveLength(1);
+});
 
-
-
-
-
+test('component renders when no seasons are selected and when rerenders with a season passed in', ()=>{
+    render(<Show show={testShow} selectedSeason="none" />);
+});
 
 
 

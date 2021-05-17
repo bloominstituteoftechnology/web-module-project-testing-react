@@ -5,24 +5,43 @@ import userEvent from '@testing-library/user-event';
 import Show from './../Show';
 
 const testShow = {
-    //add in approprate test data structure here.
+    name:'Stranger Things',
+    image: 'img.png',
+    summary: 'summary',
+    seasons: [{name: 'hello', id:'1'},{name:' helloo', id:'2'}]
 }
 
 test('renders testShow and no selected Season without errors', ()=>{
+    render(<Show show={testShow} selectedSeason={'none'}/>)
 });
 
-test('renders Loading component when prop show is null', () => {
+
+test('renders Loading component when prop show is null', ()=>{
+    render(<Show show={null} selectedSeason={'none'}/>);
+
+    const loading = screen.getByTestId('loading-container');
+
+    expect(loading).toBeInTheDocument();
+    expect(loading).toHaveTextContent(/Fetching data.../i);
+    expect(loading).toBeTruthy();
 });
 
-test('renders same number of options seasons are passed in', ()=>{
+test('renders same number of options seasons are passed in', async ()=>{
+    render(<Show show={testShow} selectedSeason={'none'}/>)
+
+    const select = screen.getByLabelText(/Select A Season/i)
+    userEvent.click(select)
+    console.log(select)
+    const options = await findAllByTestId(/season-option/i)
 });
 
-test('handleSelect is called when an season is selected', () => {
+test('handleSelect is called when a season is selected',()=>{
+
 });
 
-test('component renders when no seasons are selected and when rerenders with a season passed in', () => {
-});
+test('component renders when no seasons are selected and when rerenders with a season passed in',()=>{
 
+});
 //Tasks:
 //1. Build an example data structure that contains the show data in the correct format. A show should contain a name, a summary and an array of seasons, each with a id, name and (empty) list of episodes within them. Use console.logs within the client code if you need to to verify the structure of show data.
 //2. Test that the Show component renders when your test data is passed in through show and "none" is passed in through selectedSeason.

@@ -4,6 +4,8 @@ import Loading from "./Loading";
 import Show from "./Show";
 
 import fetchShow from '../api/fetchShow';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 const Display = (props) => {
     const [show, setShow] = useState(null);
@@ -35,3 +37,6 @@ const Display = (props) => {
 }
 
 export default Display;
+
+
+
