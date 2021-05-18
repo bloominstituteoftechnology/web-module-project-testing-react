@@ -15,7 +15,7 @@ export default function App() {
         <a className="navbar-brand" href="#"><img width="40px" src="./Lambda-Logo-Red.png"/> Lambda Integration Testing Challenge</a>
       </nav>
       <div className="App">
-        <Display displayFun={displayFunc}/>
+        <Display displayFunc={displayFunc}/>
       </div>
     </div>
   );
