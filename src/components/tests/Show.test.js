@@ -1,26 +1,124 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import Loading from '../Loading';
 
 import Show from './../Show';
 
 const testShow = {
-    //add in approprate test data structure here.
+    name: '',
+    summary: '',
+    seasons: [
+        {
+            name: 'Season 1',
+            id: 1,
+            episodes: [
+                {
+                    id: 1,
+                    name: 'Chapter 1',
+                    summary: 'The story begins...'
+                },
+                {
+                    id: 2,
+                    name: 'Chapter 2',
+                    summary: 'The story picks up...'
+                }
+            ],
+        }
+    ],
+
 }
 
+// console.log(testShow.seasons[0])
+
 test('renders testShow and no selected Season without errors', ()=>{
+    render(<Show show={testShow} selectedSeason='none' />);
+    // const showButton = screen.queryByText(/press to get show data/i);
+    // console.log(showButton)
+    // expect(showButton).toBeInTheDocument();
+
 });
 
 test('renders Loading component when prop show is null', () => {
+    render(<Show show={null} />)
+    const value = screen.queryByText(/Fetching data.../i);
+    expect(value).toBeInTheDocument();
 });
 
 test('renders same number of options seasons are passed in', ()=>{
+    render(<Show show={testShow} selectedSeason='none' />);
+
+    const seasonButton = screen.getByLabelText("Select A Season")
+
+    // console.log(seasonButton);
+    expect(seasonButton).toBeInTheDocument();
+
+    userEvent.click(seasonButton);
+
+    // expect(seasonButton.value).toHaveLength(4)
+
+    const seasonOptions = screen.queryAllByTestId("season-option");
+    expect(seasonOptions).toHaveLength(1)
+
+
 });
 
 test('handleSelect is called when an season is selected', () => {
+    const fakeHandleSelect = jest.fn();
+
+    render(<Show show={testShow} selectedSeason='none' handleSelect={fakeHandleSelect}/>);
+
+    const seasonButton = screen.getByLabelText("Select A Season")
+
+    userEvent.selectOptions(seasonButton, ['1'])
+    
+    expect(screen.getByRole("option", {name: 'Season 1'}).selected).toBe(true);
+    
+    expect(fakeHandleSelect).toBeCalledTimes(1);
+
 });
 
 test('component renders when no seasons are selected and when rerenders with a season passed in', () => {
+    const { rerender } = render(<Show show={testShow} selectedSeason='none' />);
+
+    let episodeOneSummary = screen.queryByText('The story begins...');
+    
+    expect(episodeOneSummary).not.toBeInTheDocument();
+
+    rerender(<Show show={testShow} selectedSeason={0} />);
+
+    episodeOneSummary = screen.queryByText('The story begins...');
+    
+    expect(episodeOneSummary).toBeInTheDocument();
+
+    // const { rerender } = render(<Show show={testShow} selectedSeason='none' />);
+    
+    
+    // const seasonButton = screen.getByLabelText("Select A Season")
+    
+    // userEvent.selectOptions(seasonButton, ['1'])
+    
+    // expect(screen.getByRole("option", {name: 'Season 1'}).selected).toBe(true);
+    // rerender(<Show show={testShow} selectedSeason='Season 1' />);
+    // console.log(seasonButton.value)
+    
+    // console.log(episodeOneSummary)
+    // expect(episodeOneSummary).toBeInTheDocument();
+    
+    
+
+
+    // let seasonObject = screen.queryAllByTestId('season-option');
+    // console.log(seasonObject)
+
+    // expect(seasonObject).toHaveLength(0); test
+
+
+
+
+
+
+
 });
 
 //Tasks:

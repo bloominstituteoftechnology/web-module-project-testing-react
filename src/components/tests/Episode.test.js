@@ -34,15 +34,26 @@ test("renders the summury test passed as prop", ()=>{
 
     // Test to see if data is there
     // Pull the summary data
-    expect(screen.queryByText(/Oodles of noodles for poodles./i)).toBeInTheDocument();
+    // Test 1
+    const value = screen.queryByText(/Oodles of noodles for poodles./i)
+    expect(value).toBeInTheDocument();
+
+    // Test 2
+    expect(value).toBeTruthy();
+
+    // Test 3
+    expect(value).not.toBeNull();
+
 });
 
 test("renders default image when image is not defined", ()=>{
     // Rendering episode with testEpisode
-    render(<Episode episode={testEpisodeWithoutImage} />);
+    const { rerender } = render(<Episode episode={testEpisodeWithoutImage} />);
 
     // Pull the picture via alt data
     expect(screen.queryByAltText(/stranger_things.png/i)).toBeInTheDocument();
+
+    
 
 
 })
