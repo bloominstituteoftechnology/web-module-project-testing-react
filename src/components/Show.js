@@ -1,31 +1,44 @@
-import React from 'react';
+import React from "react";
 import Episodes from "./Episodes";
-import Loading from './Loading';
+import Loading from "./Loading";
 
 const Show = (props) => {
-    const { handleSelect, selectedSeason, show } = props;
-    
-    if (!show)
-      return <Loading />
+  const { handleSelect, selectedSeason, show } = props;
 
-    return(<div data-testid="show-container">
-        <h1>{show.name}</h1>
-        <p>{show.summary}</p>
+  if (!show) return <Loading />;
 
-        <label htmlFor="seasons">Select A Season</label><br/>
-        <select onChange={handleSelect} name="seasons" id="seasons">
-          <option value="none"></option>
-          {
-            show.seasons.map(season=>{
-              return(<option data-testid="season-option" key={season.id} value={season.id}>{season.name}</option>);
-            })
-          }
-        </select>
+  return (
+    <div data-testid="show-container">
+      <h1>{show.name}</h1>
+      <p>{show.summary}</p>
 
-        {
-            (selectedSeason !== "none") && <Episodes episodes={show.seasons[selectedSeason].episodes} />
-        }
-    </div>);
-}
+      <label htmlFor="seasons">Select A Season</label>
+      <br />
+      <select
+        onChange={handleSelect}
+        data-testid={"season-select"}
+        name="seasons"
+        id="seasons"
+      >
+        <option value="none"></option>
+        {show.seasons.map((season) => {
+          return (
+            <option
+              data-testid="season-option"
+              key={season.id}
+              value={season.id}
+            >
+              {season.name}
+            </option>
+          );
+        })}
+      </select>
+
+      {selectedSeason !== "none" && (
+        <Episodes episodes={show.seasons[selectedSeason].episodes} />
+      )}
+    </div>
+  );
+};
 
 export default Show;

@@ -1,17 +1,45 @@
+import React from "react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
+import Display from "./../Display";
 
+const testShow = {
+  name: "",
+  summary: " ",
+  seasons: [{ id: Date.now(), name: "", episodes: [] }],
+};
 
+test("renders without props", () => {
+  render(<Display />);
+});
 
+test("test show component showing", () => {
+  render(<Display />);
+  const button = screen.getByRole("button");
+  fireEvent.click(button);
+  const show = screen.queryByTestId("show-container");
+  waitFor(() => expect(show).toBeInTheDocument());
+});
 
+test("seasons equals to test", () => {
+  render(<Display show={testShow} />);
+  const button = screen.getByRole("button");
+  fireEvent.click(button);
+  waitFor(() =>
+    expect(screen.getAllByTestId("season-option")).toHaveLength(
+      testShow.seasons.length
+    )
+  );
+});
 
-
-
-
-
-
-
-
-
+test("test if optional function is being called", () => {
+  const fakeClick = jest.fn();
+  render(<Display handleClick={fakeClick} />);
+  const button = screen.getByRole("button");
+  fireEvent.click(button);
+  waitFor(() => expect(fakeClick).toHaveBeenCalledTimes(1));
+});
 
 ///Tasks:
 //1. Add in nessisary imports and values to establish the testing suite.
