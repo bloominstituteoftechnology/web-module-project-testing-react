@@ -1,27 +1,50 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-
 import Show from './../Show';
 
+
 const testShow = {
+
+name: " Stanger Things",
+summary: "summary",
+seasons: [{id: "1", name: "hello", episode:[]}, {id: "2", name: "hello", episodes: []}]  
     //add in approprate test data structure here.
 }
 
 test('renders testShow and no selected Season without errors', ()=>{
+    render(<Show show={testShow}  selectedSeason={"none"}/>)
 });
 
 test('renders Loading component when prop show is null', () => {
+    render(<Show show={null}/>)
+    const value = screen.queryByText(/Fetching data.../i)
+    expect(value).toBeInTheDocument()
 });
 
 test('renders same number of options seasons are passed in', ()=>{
+    render(< Show show={testShow} selectedScreen={"none"} />)
+    const seasonButton = screen.getByLabelText(/Select a Season/i)
+    expect(seasonButton).toBeInTheDocument()
+    userEvent.click(seasonButton);
+    const seasonOption = screen.getByTestId("season-option")
+    console.log("seasonOption:", seasonOption);
+    expect(seasonOption).toHaveLength(1);
+
+
 });
 
 test('handleSelect is called when an season is selected', () => {
+render(<Show show={testShow} selectedScreen={"none"}/>)
+const handleSelect = screen.getByLabelText(/handleSelect/)
+expect(handleSelect) = screen.toBeInTheDocument()
+
 });
 
 test('component renders when no seasons are selected and when rerenders with a season passed in', () => {
+const {rerender} = render(<Show show={testShow} selectedSeason="none"/>
 });
+
 
 //Tasks:
 //1. Build an example data structure that contains the show data in the correct format. A show should contain a name, a summary and an array of seasons, each with a id, name and (empty) list of episodes within them. Use console.logs within the client code if you need to to verify the structure of show data.
