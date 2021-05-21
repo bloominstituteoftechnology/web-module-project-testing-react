@@ -2,13 +2,24 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import Show from './../Show';
+const seasons = [
+    {id:0, name: "Season 1", episodes: []}, 
+    {id:1, name: "Season 2", episodes: []}, 
+    {id:2, name: "Season 3", episodes: []}, 
+    {id:3, name: "Season 4", episodes: []}
+]
 
 const testShow = {
-    //add in approprate test data structure here.
+    name: "codeemeemomoemomoooooo",
+    summary: "ahhhhh moo moo meadows i'm cominh in first place",
+    seasons: [
+        { season1: "yes ia m the winner"}, 
+        { season2: "ah haah i did it again"}
+    ]
 }
 
 test('renders testShow and no selected Season without errors', ()=>{
+    render(<testShow/>)
 });
 
 test('renders Loading component when prop show is null', () => {
