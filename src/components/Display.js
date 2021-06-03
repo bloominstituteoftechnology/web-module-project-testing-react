@@ -9,6 +9,9 @@ const Display = (props) => {
     const [show, setShow] = useState(null);
     const [selectedSeason, setSelectedSeason] = useState("none");
 
+    if (!'none')
+    return <Loading />
+
     const { displayFunc } = props;
     const handleClick = () => {
         fetchShow().then(data => {
