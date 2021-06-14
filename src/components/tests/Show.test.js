@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, rerender } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import Show from './../Show';
@@ -36,13 +36,21 @@ test('renders same number of options seasons are passed in', ()=>{
 });
 
 test('handleSelect is called when an season is selected', () => {
-    // render(<Show show={testShow} selectedSeason={testShow.seasons[1]}/>)
-    // // render(<select></select>)
-    // userEvent.selectOptions(screen.get('select'), ['1'])
-    // expect(screen.getByRole('option', {name: 'Season 2'}).selected).toBe(true)
+    render(<Show show={testShow} selectedSeason={testShow.seasons[1]}/>)
+    // render(<select></select>)
+    userEvent.selectOptions(screen.get('select'), ['1'])
+    expect(screen.getByRole('option', {name: 'Season 2'}).selected).toBe(true)
 });
 
-test('component renders when no seasons are selected and when rerenders with a season passed in', () => {
+test('component renders when no seasons are selected and rerenders with a season passed in', () => {
+    const { rerender } = render(<Show show={testShow} selectedSeason={"none"}/>);
+    // let episodes = screen.queryByText(/Episode/i);
+    let episodes = screen.getAllByTestId('season-option');
+    expect(episodes).not.toBeInTheDocument();
+    rerender(<Show show={testShow} selectedSeason={1}/>);
+    episodes = screen.getAllByTestId('season-option');
+    expect(episodes).toBeInTheDocument();
+    // expect(episodes).toBeTruthy();
 });
 
 //Tasks:
