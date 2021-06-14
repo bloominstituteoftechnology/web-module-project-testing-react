@@ -29,10 +29,10 @@ test("renders without error", () => {
 
 test("renders the summury test passed as prop", ()=>{
     render(<Episode episode={testEpisode}/>);
-    const summary = screen.queryByText(/test summary/i);
+    const summary = screen.getByText(/minutes/i);
 
     expect(summary).toBeInTheDocument();
-    expect(summary).toHaveTextContent(/test summary/i);
+    expect(summary).toHaveTextContent(/minutes/i);
     expect(summary).not.toBeNull();
 
 });
