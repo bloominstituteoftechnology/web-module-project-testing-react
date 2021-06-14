@@ -1,4 +1,9 @@
-
+import React from 'react';
+import { render, screen, waitFor } from  '@testing-library/react';
+import Display from '../Display';
+import fetchShow from '../../api/fetchShow';
+import userEvent from '@testing-library/user-event';
+jest.mock("../../api/fetchShow.js");
 
 
 
