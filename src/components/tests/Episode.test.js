@@ -36,7 +36,10 @@ test("renders the summary test passed as prop", ()=>{
 });
 
 test("renders default image when image is not defined", ()=>{
-    
+    render(<Episode  episode={testEpisodeWithoutImage}/>);
+    const image = screen.getByAltText('./stranger_things.png');
+    expect(image).toHaveAttribute('alt', './stranger_things.png');
+    // expect(image.alt).toContain(/stranger_things.png/i);
 })
 
 //Tasks
