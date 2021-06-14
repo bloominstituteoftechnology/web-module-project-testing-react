@@ -1,7 +1,15 @@
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
+import Display from '../Display';
 
 
-
-
+test('renders display component without any props passed in', ()=>{
+    render(<Display />);
+    const display = screen.queryByText(/press to get show data/i);
+    expect(display).toBeInTheDocument();
+});
 
 
 
@@ -14,7 +22,7 @@
 
 
 ///Tasks:
-//1. Add in nessisary imports and values to establish the testing suite.
+//1. Add in necessary imports and values to establish the testing suite.
 //2. Test that the Display component renders without any passed in props.
 //3. Rebuild or copy a show test data element as used in the previous set of tests.
 //4. Test that when the fetch button is pressed, the show component will display. Make sure to account for the api call and change of state in building your test.
