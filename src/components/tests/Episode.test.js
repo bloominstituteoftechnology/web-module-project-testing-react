@@ -1,32 +1,36 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import Episode from './../Episode';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import Episode from "./../Episode";
 
 const testEpisode = {
-    id:1,
-    name: "",
-    image: "http://static.tvmaze.com/uploads/images/medium_landscape/67/168918.jpg",
-    season: 1,
-    number: 1,
-    summary: "",
-    runtime: 1
-}
+  id: 1,
+  name: "",
+  image: "http://static.tvmaze.com/uploads/images/medium_landscape/67/168918.jpg",
+  season: 1,
+  number: 1,
+  summary: "Summary testing",
+  runtime: 1,
+};
 
 const testEpisodeWithoutImage = {
-    //Add in approprate test data structure here.
-}
+  //Add in approprate test data structure here.
+};
 
 test("renders without error", () => {
-
+  render(<Episode testEpisode={testEpisode} />);
 });
 
-test("renders the summury test passed as prop", ()=>{
-    
+test("renders the summury test passed as prop", () => {
+  render(<Episode testEpisode={testEpisode} />);
+
+  let summaryTest = screen.queryByText(/summary testing/i);
+
+  expect(summaryTest).toBeInTheDocument();
+  expect(summaryTest).toHaveTextContent(/summary testing/i);
+  expect(summaryTest).not.toBeFalsy();
 });
 
-test("renders default image when image is not defined", ()=>{
-    
-})
+test("renders default image when image is not defined", () => {});
 
 //Tasks
 //1. Complete a test that shows the Episode component renders. Pass in the provided example episode data as a test prop.
