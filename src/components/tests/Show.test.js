@@ -1,26 +1,158 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { queryByText, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-
 import Show from './../Show';
-
+import TestLoading from '../Loading';
 const testShow = {
     //add in approprate test data structure here.
+    seasons:[
+        {
+            id:0,
+            name:'testing show 1234'
+
+        }
+    ]
 }
+// const { handleSelect, selectedSeason, show } = props;
+
+const testHandleSelect = ()=>{
+
+};
+const testSelectedSeason = "none";
+
+jest.mock('../Episodes',()=>()=>{
+    return <div>Something</div>
+    }
+);
 
 test('renders testShow and no selected Season without errors', ()=>{
+    // arrange
+    const {queryByText,getByText} = render(<Show handleSelect={testHandleSelect} selectedSeason={testSelectedSeason} show={testShow}/>);
+
+    // act
+    // assert
+    expect(queryByText("Something")).toBeNull();
+    expect(getByText("testing show 1234")).toBeInTheDocument();
 });
 
+
+jest.mock("../Loading");
 test('renders Loading component when prop show is null', () => {
+    // arrange
+
+    TestLoading.mockImplementation(()=>{
+        return(<div>Testing Loading 1234</div>)
+    })
+
+    const {getByText} = render(<Show handleSelect={testHandleSelect} selectedSeason={testSelectedSeason}show={null}/>);
+    // act
+    // assert
+    expect(getByText("Testing Loading 1234")).toBeInTheDocument();
 });
+
 
 test('renders same number of options seasons are passed in', ()=>{
+    // arrange
+    const testOptionsShow = {
+        seasons:[
+            {
+                id:0,
+                name:'testing show 1234'
+    
+            },
+            {
+                id:1,
+                name:'testing show 1234 1'
+            },
+            {   
+                id:2,
+                name:'testing show 1234 2'
+            }
+        ]
+    }
+    
+    render(<Show handleSelect={testHandleSelect} selectedSeason={testSelectedSeason}show={{seasons:[]}}/>);
+    
+    // act
+    const optionsEmpty = screen.getAllByRole("option");
+
+    // arrange
+    render(<Show handleSelect={testHandleSelect} selectedSeason={testSelectedSeason}show={testOptionsShow}/>);
+
+    // act
+    const options = screen.getAllByRole("option");
+
+    // assert  
+
+    expect(options.length-optionsEmpty.length*2).toBe(3);
 });
 
+const mockHandleSelect = jest.fn(); 
 test('handleSelect is called when an season is selected', () => {
+    // arrange
+    const testOptionsShow = {
+        seasons:[
+            {
+                id:0,
+                name:'testing show 1234'
+    
+            },
+            {
+                id:1,
+                name:'testing show 1234 1'
+            },
+            {   
+                id:2,
+                name:'testing show 1234 2'
+            }
+        ]
+    }
+    const {getByText} = render(<Show handleSelect={mockHandleSelect} selectedSeason={testSelectedSeason}show={testOptionsShow}/>);
+    // act
+    const option = getByText('testing show 1234 1');
+    userEvent.selectOptions(option);
+    // assert
+    expect(mockHandleSelect.call.length).toBe(1);
+
 });
 
+
+
+jest.mock('../Episodes',()=>()=>{
+    return <div>Episodes are rendered</div>
+    }
+);
 test('component renders when no seasons are selected and when rerenders with a season passed in', () => {
+    
+    // arrange
+    const testOptionsShow = {
+        seasons:[
+            {
+                id:0,
+                name:'testing show 1234'
+    
+            },
+            {
+                id:1,
+                name:'testing show 1234 1'
+            },
+            {   
+                id:2,
+                name:'testing show 1234 2'
+            }
+        ]
+    }
+    const {queryByText,getByText, rerender} = render(<Show handleSelect={testHandleSelect} selectedSeason={"none"} show={testOptionsShow}/>);
+    // act
+    let episodeEle = queryByText("Episodes are rendered");
+    // assert
+    expect(episodeEle).toBeNull();
+    // arrange
+    rerender(<Show handleSelect={testHandleSelect} selectedSeason={0} show={testOptionsShow}/>)
+    // act
+    episodeEle = getByText("Episodes are rendered");
+    // assert
+    expect(episodeEle).toBeInTheDocument();
 });
 
 //Tasks:
