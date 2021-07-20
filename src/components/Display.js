@@ -11,11 +11,17 @@ const Display = (props) => {
 
     const { displayFunc } = props;
     const handleClick = () => {
-        fetchShow().then(data => {
+        fetchShow()
+        .then(data => {
             setShow(data);
             if (displayFunc) {
                 displayFunc();
             }
+        
+            
+        })
+        .catch(err=>{
+            console.log(err);
         });
     }
         

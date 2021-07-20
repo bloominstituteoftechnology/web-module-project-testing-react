@@ -2,9 +2,10 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Display from './../Display';
-
+// mockFetchShow is used in the last 2 tests, where it is called indirectly
 import mockFetchShow from '../../api/fetchShow';
 jest.mock('../../api/fetchShow');
+
 //3. Rebuild or copy a show test data element as used in the previous set of tests.
 const testShow = {
     //add in approprate test data structure here.
@@ -52,23 +53,26 @@ test('when the fetch button is pressed, the show component will display with cor
     const seasonOptions = screen.getAllByTestId("season-option");
     expect(seasonOptions).toHaveLength(3);
 
-})
+});
 
 test("calls displayFunc when button is clicked", async ()=>{
-    const mockDisplayFunc = jest.fn(()=>{return("TEST")});
-       //Arrange: renders component
+    mockFetchShow.mockResolvedValue(testShow);
+    const mockDisplayFunc = jest.fn();
+
+    //Arrange: renders component
+    render(<Display displayFunc={mockDisplayFunc}/>)
 
     //Act: Click button
+    const button = screen.getByRole("button");
+    userEvent.click(button);
+
+    // //Assert: ?
     await waitFor(()=>{
-        render(<Display displayFunc={mockDisplayFunc}/>)
-        const button = screen.getByRole("button");
-        userEvent.click(button);
+        expect(mockDisplayFunc.mock.calls.length === 1).toBeTruthy();
+        expect(mockDisplayFunc.mock.calls.length).toBe(1);
+        expect(mockDisplayFunc.mock.calls).toHaveLength(1);
+        expect(mockDisplayFunc).toHaveBeenCalled();
     });
-    //Assert: ?
-    expect(mockDisplayFunc.mock.calls.length === 1).toBeTruthy();
-    expect(mockDisplayFunc.mock.calls.length).toBe(1);
-    expect(mockDisplayFunc.mock.calls).toHaveLength(1);
-    expect(mockDisplayFunc).toHaveBeenCalledTimes(1);
 });
 
 
