@@ -1,5 +1,7 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState } from 'react';
 
+// eslint-disable-next-line no-unused-vars
 import Loading from "./Loading";
 import Show from "./Show";
 

@@ -13,7 +13,8 @@
     "react-dom": "^16.13.1",
     "react-dropdown": "^1.7.0",
     "react-scripts": "3.4.1",
-    "striptags": "^3.1.1"
+    "striptags": "^3.1.1",
+    "user-event": "^4.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,32 +1,49 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import Episode from './../Episode';
+/* eslint-disable no-unused-vars */
+import React from "react";
+import {
+  getByTestId,
+  queryByTestId,
+  render,
+  screen,
+} from "@testing-library/react";
+import Episode from "./../Episode";
+
+const TEST_MESSAGE = "test message";
 
 const testEpisode = {
-    id:1,
-    name: "",
-    image: "http://static.tvmaze.com/uploads/images/medium_landscape/67/168918.jpg",
-    season: 1,
-    number: 1,
-    summary: "",
-    runtime: 1
-}
+  id: 1,
+  name: "",
+  image:
+    "http://static.tvmaze.com/uploads/images/medium_landscape/67/168918.jpg",
+  season: 1,
+  number: 1,
+  summary: TEST_MESSAGE,
+  runtime: 1,
+};
 
 const testEpisodeWithoutImage = {
-    //Add in approprate test data structure here.
-}
+  //Add in approprate test data structure here.
+};
 
 test("renders without error", () => {
-
+  render(<Episode episode={testEpisode} />);
 });
 
-test("renders the summury test passed as prop", ()=>{
-    
+test("renders the summary test passed as prop", () => {
+  render(<Episode episode={testEpisode} />);
+  const episodeSummary = screen.getByTestId("episode summary");
+  expect(episodeSummary).not.toBeNull();
+  expect(episodeSummary).toBeInTheDocument();
+  expect(episodeSummary).toHaveTextContent(TEST_MESSAGE);
 });
 
-test("renders default image when image is not defined", ()=>{
-    
-})
+test("renders default image when image is not defined", () => {
+  render(<Episode episode={{ ...testEpisode, image: null }} />);
+  const episodeImage = screen.getByAltText("./stranger_things.png");
+  expect(episodeImage).not.toBeNull();
+  expect(episodeImage).toBeInTheDocument();
+  
+});
 
 //Tasks
 //1. Complete a test that shows the Episode component renders. Pass in the provided example episode data as a test prop.
