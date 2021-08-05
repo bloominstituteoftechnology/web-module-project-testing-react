@@ -6,7 +6,6 @@ const Show = (props) => {
   const { handleSelect, selectedSeason, show } = props;
 
   if (!show) return <Loading />;
-  console.log(show);
   return (
     <div data-testid="show-container">
       <h1>{show.name}</h1>

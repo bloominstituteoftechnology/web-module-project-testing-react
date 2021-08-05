@@ -1,6 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import {
+  getByTestId,
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import Show from "./../Show";
@@ -45,7 +51,14 @@ test("renders same number of options as seasons that are passed in", () => {
   expect(seasonOptions).toHaveLength(1);
 });
 
-test("handleSelect is called when an season is selected", () => {});
+test("handleSelect is called when a season is selected", async () => {
+  render(<Show show={testShow} selectedSeason="none" />);
+  const seasonOption = screen.getByTestId("season-option");
+  fireEvent.click(seasonOption);
+  const { rerender } = render(<Show show={testShow} selectedSeason="none" />);
+  rerender(<Show show={testShow} selectedSeason='1' />);
+//   expect(screen.findByTestId("episodes-container")).toBeInTheDocument();
+});
 
 test("component renders when no seasons are selected and when rerenders with a season passed in", () => {});
 
