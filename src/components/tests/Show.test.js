@@ -1,27 +1,45 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+/* eslint-disable no-unused-vars */
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
-import Show from './../Show';
+import Show from "./../Show";
 
 const testShow = {
-    //add in approprate test data structure here.
-}
+  image: null,
+  name: "test_show_name",
+  summary: "test_show_summary",
+  seasons: [
+    {
+      id: 1,
+      name: "test_season_name",
+      episodes: [
+        {
+          id: 1,
+          name: "",
+          image:
+            "http://static.tvmaze.com/uploads/images/medium_landscape/67/168918.jpg",
+          season: 1,
+          number: 1,
+          summary: "test message",
+          runtime: 1,
+        },
+      ],
+    },
+  ],
+};
 
-test('renders testShow and no selected Season without errors', ()=>{
+test("renders testShow and no selected Season without errors", () => {
+  render(<Show show={testShow} selectedSeason="none" />);
 });
 
-test('renders Loading component when prop show is null', () => {
-});
+test("renders Loading component when prop show is null", () => {});
 
-test('renders same number of options seasons are passed in', ()=>{
-});
+test("renders same number of options seasons are passed in", () => {});
 
-test('handleSelect is called when an season is selected', () => {
-});
+test("handleSelect is called when an season is selected", () => {});
 
-test('component renders when no seasons are selected and when rerenders with a season passed in', () => {
-});
+test("component renders when no seasons are selected and when rerenders with a season passed in", () => {});
 
 //Tasks:
 //1. Build an example data structure that contains the show data in the correct format. A show should contain a name, a summary and an array of seasons, each with a id, name and (empty) list of episodes within them. Use console.logs within the client code if you need to to verify the structure of show data.
