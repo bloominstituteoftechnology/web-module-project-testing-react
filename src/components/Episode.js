@@ -13,7 +13,7 @@ const Episode = (props) => {
           Season {season}, Episode {number}
         </p>
         <h3>{name}</h3>
-        <p data-testid="summary">{summary}</p>
+        <p data-testid="episode summary">{summary}</p>
         <div className="flex-spacer" />
         <p className="episode-runtime">{runtime} minutes</p>
       </div>
