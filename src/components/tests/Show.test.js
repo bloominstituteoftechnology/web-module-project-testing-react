@@ -6,18 +6,51 @@ import Show from './../Show';
 
 const testShow = {
     //add in approprate test data structure here.
+    image: null,
+    name: "test_show_name",
+    summary: "test_show_summary",
+    seasons: [
+      {
+        id: 1,
+        name: "test_season_name",
+        episodes: [
+          {
+            id: 1,
+            name: "",
+            image:
+              "http://static.tvmaze.com/uploads/images/medium_landscape/67/168918.jpg",
+            season: 1,
+            number: 1,
+            summary: "test message",
+            runtime: 1,
+          },
+        ],
+      },
+    ],
 }
 
 test('renders testShow and no selected Season without errors', ()=>{
+    render(<Show show={testShow} selectedSeason="none" />)
 });
 
 test('renders Loading component when prop show is null', () => {
+    render(<Show show={null} selectedSeason="none" />);
+    const loadingComponent = screen.getByTestId("loading-container");
+    expect(loadingComponent).toBeInTheDocument();
 });
 
 test('renders same number of options seasons are passed in', ()=>{
+    render(<Show show={testShow} selectedSeason="none" />);
+    const seasonOptions = screen.getAllByTestId("season-option");
+    expect(seasonOptions).toHaveLength(1);
 });
 
 test('handleSelect is called when an season is selected', () => {
+    render(<Show show={testShow} selectedSeason="none" />);
+    const seasonOption = screen.getByTestId("season-option");
+    fireEvent.click(seasonOption);
+    const { rerender } = render(<Show show={testShow} selectedSeason="none" />);
+    rerender(<Show show={testShow} selectedSeason='1' />);
 });
 
 test('component renders when no seasons are selected and when rerenders with a season passed in', () => {
