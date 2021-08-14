@@ -2,6 +2,18 @@
 
 This module explored passing props into test components, rerendering components and using mocks to both monitor functional props and override the functionality of external modules. In this project, you will practice each of these practices in the testing of an application that displays TV show data.
 
+- [Unit Testing React Module Project: Stranger Things](#unit-testing-react-module-project-stranger-things)
+  - [Objectives](#objectives)
+  - [Introduction](#introduction)
+  - [Instructions](#instructions)
+    - [Task 1: Project Set Up](#task-1-project-set-up)
+    - [Task 2: Project Requirements](#task-2-project-requirements)
+      - [The Episode Component](#the-episode-component)
+    - [The Show Component](#the-show-component)
+    - [The Display Component](#the-display-component)
+    - [Stretch goals](#stretch-goals)
+  - [Rick Mansfield's Pull/push trail for Project Testing React](#rick-mansfields-pullpush-trail-for-project-testing-react)
+
 ## Objectives
 - Understand how to test the effects of passing specific props into a component
 - Understand how to monitor the behavior of functional mock props.
@@ -60,3 +72,7 @@ Get the project fired up and start using it as a user would. Try to go through t
 - Look up the `TVMaze` API. Add a dropdown with the titles of some other popular shows. Add the user sequence of choosing a different show to fetch data for different shows.
 
 - Add React Router, and add the functionality to click an episode and navigate to an episode page.
+
+## Rick Mansfield's Pull/push trail for Project Testing React
+
+- [Link for convenience]()
