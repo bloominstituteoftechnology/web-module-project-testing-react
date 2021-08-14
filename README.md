@@ -75,4 +75,4 @@ Get the project fired up and start using it as a user would. Try to go through t
 
 ## Rick Mansfield's Pull/push trail for Project Testing React
 
-- [Link for convenience]()
+- [Link for convenience](https://github.com/LambdaSchool/web-module-project-testing-react/pull/65)
