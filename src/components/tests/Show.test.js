@@ -85,8 +85,18 @@ test('handleSelect is called when an season is selected', () => {
 //6. Test that the episode component DOES NOT render when the selectedSeason props is "none" and DOES render the episode component when the selectedSeason prop has a valid season index.
 test('component renders when no seasons are selected and when rerenders with a season passed in', () => {
     //Arrange
+    const { rerender } = render(<Show show={testShow} selectedSeason="none" />);
     //Act
+    let episodeDiv = document.getElementsByClassName("episode");
     //Assert
+    expect(episodeDiv.length).toBe(0);
+
+    //Arrange
+    rerender(<Show show={testShow} selectedSeason={3} />)//remember above I selected season 3
+    //Act
+    episodeDiv = document.getElementsByClassName("episode");//already defined above useing let
+    //Assert
+    expect(episodeDiv.length).toBe(1);
 });
 
 
