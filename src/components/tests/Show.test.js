@@ -7,12 +7,14 @@ import Show from './../Show';
 //NOTE NOTE NOTE I had to console.log('FETSH SHOW DATA',data); on line 29 of fetchShow.js to get the proper structure. I started by mimicking the format from lines 24-37 of fetchShow.js and expanding that to inclue the data I found on the console.log
 const testShow = {
     //add in approprate test data structure here.
-    name: "Test Show",
+    
     image: {
         medium: "https://static.tvmaze.com/uploads/images/medium_portrait/200/501942.jpg",
         original: "https://static.tvmaze.com/uploads/images/original_untouched/200/501942.jpg"
         },//I retrieved this image data from the chrome console from the res data
+    name: "Test Show",
     summary: "Test Summary blah blah blah",
+    //note seasons is from fetchShow.js line 34 seasons: formatSeasons(data._embedded.episodes). Which is becuase the res data returns _embedded as episodes: Array
     seasons: [
         {id:0, name: "Test Season 1", episodes: []}, 
         {id:1, name: "Tet Season 2", episodes: []}, 
