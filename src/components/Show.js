@@ -7,13 +7,12 @@ const Show = (props) => {
     
     if (!show)
       return <Loading />
-
     return(<div data-testid="show-container">
         <h1>{show.name}</h1>
         <p>{show.summary}</p>
 
         <label htmlFor="seasons">Select A Season</label><br/>
-        <select onChange={handleSelect} name="seasons" id="seasons">
+        <select onChange={handleSelect} name="seasons" id="seasons" data-testid="select">
           <option value="none"></option>
           {
             show.seasons.map(season=>{

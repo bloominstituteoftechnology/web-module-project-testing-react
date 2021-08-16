@@ -1,17 +1,42 @@
 
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import fetchShow from "../../api/fetchShow";
+import axios from "axios";
+import Display from '../Display';
 
+jest.mock("axios")
 
+const testShow = {
+    name: "stuff",
+    sumarry: "sumarry",
+    seasons: [
+        {
+            id: "1", 
+            name: "name",
+            episodes: []
+        }
+    ]
+    //add in approprate test data structure here.
+}
 
+test("renders", () => {
+    render(<Display/>)
+})
 
+test("fetch click", async () => {
+    const { findByTestId, getAllByTestId } = render(<Display/>)
+    const button = screen.getByRole("button")
+    userEvent.click(button)
 
+    const show = await findByTestId("show-container")
+    expect(show).toBeInTheDocument()
 
-
-
-
-
-
-
-
+    const options = getAllByTestId("season-option")
+    axios.get.mockResolvedValue(testShow)
+    expect(options).toHaveLength(testShow.seasons.length + 1)
+})
 
 ///Tasks:
 //1. Add in nessisary imports and values to establish the testing suite.

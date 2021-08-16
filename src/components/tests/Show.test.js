@@ -5,22 +5,77 @@ import userEvent from '@testing-library/user-event';
 import Show from './../Show';
 
 const testShow = {
+    name: "stuff",
+    sumarry: "sumarry",
+    seasons: [
+        {
+            id: "1", 
+            name: "name",
+            episodes: []
+        }
+    ]
     //add in approprate test data structure here.
 }
 
 test('renders testShow and no selected Season without errors', ()=>{
+    const mockFunction = jest.fn()
+    render(<Show 
+        show={testShow} 
+        handleSelect={mockFunction} 
+        selectedSeason="none"
+    />)
 });
 
 test('renders Loading component when prop show is null', () => {
+    const mockFunction = jest.fn()
+    render(<Show 
+        show={null} 
+        handleSelect={mockFunction} 
+        selectedSeason="none"
+    />)
+    const loader = screen.getByTestId("loading-container")
+    expect(loader).toBeInTheDocument()
 });
 
 test('renders same number of options seasons are passed in', ()=>{
+    const mockFunction = jest.fn()
+    render(<Show 
+        show={testShow} 
+        handleSelect={mockFunction} 
+        selectedSeason="none"
+    />)
+    const options = screen.getAllByTestId("season-option")
+    expect(options).toHaveLength(testShow.seasons.length)
 });
 
 test('handleSelect is called when an season is selected', () => {
+    const mockFunction = jest.fn()
+    const { getByTestId, getAllByTestId } = render(<Show 
+        show={testShow} 
+        handleSelect={mockFunction} 
+        selectedSeason="none"
+    />)
+    const select = getByTestId("select")
+    userEvent.selectOptions(select, ["1"])
+    expect(mockFunction.mock.calls).toHaveLength(1)
 });
 
 test('component renders when no seasons are selected and when rerenders with a season passed in', () => {
+    const mockFunction = jest.fn()
+    const { queryByTestId, rerender } = render(<Show 
+        show={testShow} 
+        handleSelect={mockFunction} 
+        selectedSeason="none"
+    />)
+    const seasons = queryByTestId("episodes-container")
+    expect(seasons).not.toBeInTheDocument()
+    rerender(<Show 
+        show={testShow} 
+        handleSelect={mockFunction} 
+        selectedSeason={0}
+    />)
+    const seasons2 = queryByTestId("episodes-container")
+    expect(seasons2).toBeInTheDocument()
 });
 
 //Tasks:
