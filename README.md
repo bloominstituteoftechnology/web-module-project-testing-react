@@ -2,6 +2,22 @@
 
 This module explored passing props into test components, rerendering components and using mocks to both monitor functional props and override the functionality of external modules. In this project, you will practice each of these practices in the testing of an application that displays TV show data.
 
+- [Unit Testing React Module Project: Stranger Things](#unit-testing-react-module-project-stranger-things)
+  - [Objectives](#objectives)
+  - [Introduction](#introduction)
+  - [Instructions](#instructions)
+    - [Task 1: Project Set Up](#task-1-project-set-up)
+    - [Task 2: Project Requirements](#task-2-project-requirements)
+      - [The Episode Component](#the-episode-component)
+    - [The Show Component](#the-show-component)
+    - [The Display Component](#the-display-component)
+    - [Stretch goals](#stretch-goals)
+  - [Rick Mansfield's Pull/push trail for Project Testing React](#rick-mansfields-pullpush-trail-for-project-testing-react)
+  - [class Questions](#class-questions)
+  - [Questions to ask yourself to create good Tests](#questions-to-ask-yourself-to-create-good-tests)
+  - [What are some Possible unit Tests for MissionFrom.js?](#what-are-some-possible-unit-tests-for-missionfromjs)
+  - [Arrange Act Assert](#arrange-act-assert)
+
 ## Objectives
 - Understand how to test the effects of passing specific props into a component
 - Understand how to monitor the behavior of functional mock props.
@@ -60,3 +76,43 @@ Get the project fired up and start using it as a user would. Try to go through t
 - Look up the `TVMaze` API. Add a dropdown with the titles of some other popular shows. Add the user sequence of choosing a different show to fetch data for different shows.
 
 - Add React Router, and add the functionality to click an episode and navigate to an episode page.
+
+## Rick Mansfield's Pull/push trail for Project Testing React
+
+- [Link for convenience](https://github.com/LambdaSchool/web-module-project-testing-react/pull/65)
+
+## class Questions 
+1.  **What is end to end testing?**
+    1.  End-to-end testing is a technique that tests the entire software product from beginning to end to ensure the application flow behaves as expected. It defines the product’s system dependencies and ensures all integrated pieces work together as expected. The main purpose of End-to-end (E2E) testing is to test from the end user’s experience by simulating the real user scenario and validating the system under test and its components for integration and data integrity. End-To-End (E2E) testing is a technique used to test an entire flow as if we were an actual user by simulating their actions (clicks, pressing certain keys, typing into a field, etc).
+    2.  Simulates a user Clicking through a site
+    3.  evaluates Entrie Applications
+    4.  **_Cypress_**
+
+2.  **What is integration Testing , and whay is it used?** [TestingXperts](https://www.testingxperts.com/blog/what-is-integration-testing)
+    1.  What it is = Integration testing is one of the agile methodologies of software testing where individual components or units of code are tested to validate interactions among different software system modules. In this process, these system components are either tested as a single group or organized iteratively.
+    2.  Why used = to validate the performance of the entire software system as a whole. 
+    3.  Verify several components work together
+    4.  Evaluates Application Systems
+    5.  **_React-Testing-Library_**
+
+3.  **Unit Tests**
+    1.  Test Individual Functions/components
+    2.  Evaluates Small Units of Code (not UI)
+    3.  **_Jest_**
+## Questions to ask yourself to create good Tests
+1.  Does the component render by default without errors?
+2.  How does the component changed depending on the props passed in?
+3.  Does the component respond to user input?
+4.  Does the compnent respont o state change (async calls / redux)?
+5.  Does the component have error states?
+
+## What are some Possible unit Tests for MissionFrom.js?
+1. Does MissionForm Render Correctly without errors
+2. Does it render the message "We are fetching data" correctly when isFetchingData is True?
+3. Does the button render correctly when isfetchingData is false?
+4. Does it correctly call props.getData() when button is clicked?
+
+## Arrange Act Assert
+1. Arrange: Setup the react components to be tested. 
+2. Act: Execute the behaviour (if there is one) and extract what is being tested. 
+3. Assert: Check to see if the expected responses occur. 
