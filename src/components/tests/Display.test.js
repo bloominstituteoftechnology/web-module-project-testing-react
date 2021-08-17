@@ -1,8 +1,71 @@
+import { render, screen, waitFor } from '@testing-library/react';
+import React from 'react'
+import Display from '../Display'
+import userEvent from '@testing-library/user-event';
+import fetchShow from '../../api/fetchShow';
+jest.mock('../../api/fetchShow')
+
+test("renders without errors", () =>{
+    render(<Display/>);
+})
+
+const testData = {
+    id:1987,
+    name: "",
+    image: "http://static.tvmaze.com/uploads/images/medium_landscape/67/168918.jpg",
+    seasons: [
+                {id:0, name: "Season 1", episodes: [
+                    {summary: "episode 1", image: null},
+                    {summary: "episode 2", image: null}
+                ]}, 
+                {id:1, name: "Season 2", episodes: [
+                    {summary: "episode 1", image: null},
+                    {summary: "episode 2", image: null}
+                ]}, 
+                {id:2, name: "Season 3", episodes: [
+                    {summary: "episode 1", image: null},
+                    {summary: "episode 2", image: null}
+                ]}, 
+                {id:3, name: "Season 4", episodes: [
+                    {summary: "episode 1", image: null},
+                    {summary: "episode 2", image: null}
+                ]}
+            ],
+    number: 1,
+    summary: "Dr. Alexei reveals what the Russians have been building, and Eleven sees where Billy has been. Dustin and Erica stage a daring rescue.",
+    runtime: 1
+}
+
+test("show component displays", async () =>{
+    fetchShow.mockResolvedValueOnce(testData)
+    console.log("started test")
+    render(<Display/>)
 
 
+    console.log("displa rendered")
+    const fetbutton = screen.getByRole("button")
+    userEvent.click(fetbutton)
 
+    
+    
+    const display = screen.findByTestId("show-container");
+    await waitFor(() => {
+    expect(display).not.toBeNull();
+    
+    })
 
-
+    const opt = screen.getAllByTestId("season-option");
+    await waitFor(() => {
+        expect(opt).toHaveLength(4)
+    
+        })
+        
+        const fakeHandle = jest.fn().mockImplementation(() => console.log("adashdjhsjdfhdfks"));
+        render(<Display displayFunc={fakeHandle}/>)
+        userEvent.click(fetbutton);
+    
+}
+)
 
 
 
