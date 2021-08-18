@@ -50,8 +50,11 @@ test('renders same number of options seasons are passed in', ()=>{
 test('handleSelect is called when an season is selected', () => {
     const fakeHandle = jest.fn();
 
-    render(<Show handleSelect={fakeHandle} selectedSeason={1}/>)
-
+    render(<Show show={testShow} selectedSeason={1} handleSelect={fakeHandle}/>)
+    const select = screen.getByLabelText(/Select a Season/i);
+    userEvent.selectOptions(select, ['1'])
+    expect(fakeHandle).toBeCalled();
+    
 
 });
 

@@ -48,21 +48,20 @@ test("show component displays", async () =>{
 
     
     
-    const display = screen.findByTestId("show-container");
-    await waitFor(() => {
-    expect(display).not.toBeNull();
-    
-    })
-
-    const opt = screen.getAllByTestId("season-option");
-    await waitFor(() => {
-        expect(opt).toHaveLength(4)
-    
-        })
+    const display = await screen.findByTestId("show-container");
+    expect(display).toBeInTheDocument();
+});
+    test('renders season options matching fetch return when button is clicked', async () =>{
+        fetchShow.mockResolvedValueOnce(testData)
         
-        const fakeHandle = jest.fn().mockImplementation(() => console.log("adashdjhsjdfhdfks"));
-        render(<Display displayFunc={fakeHandle}/>)
-        userEvent.click(fetbutton);
+        render(<Display/>);
+        const button =  screen.getByRole('button');
+        userEvent.click(button)
+
+        await waitFor(() =>{
+            const seasonOptions= screen.queryAllByTestId('season-option');
+            expect(seasonOptions).toHaveLength(4)
+        })
     
 }
 )
