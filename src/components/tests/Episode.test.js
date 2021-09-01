@@ -23,19 +23,19 @@ const testEpisodeWithoutImage = {
 }
 
 test("renders without error", () => {
-    render(<Episode episode={testEpisode} />)
+    render(<Episode episode={testEpisode} />);
 });
 
 test("renders the summury test passed as prop", ()=>{
     render(<Episode episode={testEpisode} />);
     const summ = screen.queryAllByText(/a specific test summary/i);
-    expect(summ).not.toBeNull()
+    expect(summ).not.toBeNull();
 });
 
 test("renders default image when image is not defined", ()=>{
     render(<Episode episode={testEpisode} />);
     const img = screen.queryAllByAltText(/stranger_things\.png/i);
-    expect(img).not.toBeNull()
+    expect(img).not.toBeNull();
 })
 
 //Tasks

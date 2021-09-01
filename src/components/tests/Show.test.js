@@ -5,13 +5,20 @@ import userEvent from '@testing-library/user-event';
 import Show from './../Show';
 
 const testShow = {
-    //add in approprate test data structure here.
-}
+    name: '',
+    image: '',
+    summary: '',
+    seasons: []
+  }
 
 test('renders testShow and no selected Season without errors', ()=>{
+    render(<Show show={testShow} selectedSeason={"none"}/>);
 });
 
 test('renders Loading component when prop show is null', () => {
+    render(<Show show={null} selectedSeason={"none"}/>);
+    const loading = screen.queryAllByTestId(/loading-container/i);
+    expect(loading).not.toBeNull();
 });
 
 test('renders same number of options seasons are passed in', ()=>{

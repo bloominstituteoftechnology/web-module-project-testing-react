@@ -13,7 +13,7 @@ const Display = (props) => {
     const handleClick = () => {
         fetchShow().then(data => {
             setShow(data);
-
+            
             if (displayFunc) {
                 displayFunc();
             }
@@ -24,7 +24,7 @@ const Display = (props) => {
     const handleSelect = e => {
         setSelectedSeason(e.target.value);
     };
-
+    
     return (
         <div>
             <img className="poster-img" src='http://static.tvmaze.com/uploads/images/original_untouched/200/501942.jpg' alt="header image" />
