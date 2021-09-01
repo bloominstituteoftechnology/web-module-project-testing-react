@@ -8,8 +8,14 @@ const testShow = {
     name: '',
     image: '',
     summary: '',
-    seasons: []
+    seasons: [
+        {id:0, name: "Season 1", episodes: []}, 
+        {id:1, name: "Season 2", episodes: []}, 
+        {id:2, name: "Season 3", episodes: []}, 
+        {id:3, name: "Season 4", episodes: []}
+      ]
   }
+const testLength = testShow.seasons.length
 
 test('renders testShow and no selected Season without errors', ()=>{
     render(<Show show={testShow} selectedSeason={"none"}/>);
@@ -22,6 +28,9 @@ test('renders Loading component when prop show is null', () => {
 });
 
 test('renders same number of options seasons are passed in', ()=>{
+    render(<Show show={testShow} selectedSeason={"none"}/>);
+    const options = screen.queryAllByRole("option");
+    expect(options.length).toBe(testLength + 1)
 });
 
 test('handleSelect is called when an season is selected', () => {
