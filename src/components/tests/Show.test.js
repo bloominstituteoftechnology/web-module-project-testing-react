@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { queryByTestId, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import Show from './../Show';
@@ -46,6 +46,11 @@ test('handleSelect is called when an season is selected', () => {
 });
 
 test('component renders when no seasons are selected and when rerenders with a season passed in', () => {
+    const {rerender} = render(<Show show={testShow} selectedSeason={"none"}/>)
+    expect(screen.queryByTestId("episodes-container")).toBeNull()
+
+    rerender(<Show show={testShow} selectedSeason={"1"}/>)
+    expect(screen.queryByTestId("episodes-container")).not.toBeNull()
 });
 
 //Tasks:
