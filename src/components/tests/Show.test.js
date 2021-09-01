@@ -29,11 +29,20 @@ test('renders Loading component when prop show is null', () => {
 
 test('renders same number of options seasons are passed in', ()=>{
     render(<Show show={testShow} selectedSeason={"none"}/>);
-    const options = screen.queryAllByRole("option");
-    expect(options.length).toBe(testLength + 1)
+    const options = screen.queryAllByTestId("season-option");
+    expect(options.length).toBe(testLength);
 });
 
 test('handleSelect is called when an season is selected', () => {
+    const handleSelect = jest.fn()
+    render(<Show show={testShow} selectedSeason={"none"} handleSelect={handleSelect}/>);
+    const select = screen.getByRole("combobox");
+    
+    userEvent.selectOptions(select, ['0'])
+    expect(screen.getByRole('option', {name: 'Season 1'}).selected).toBe(true)
+
+    expect(handleSelect).toHaveBeenCalled()
+
 });
 
 test('component renders when no seasons are selected and when rerenders with a season passed in', () => {
