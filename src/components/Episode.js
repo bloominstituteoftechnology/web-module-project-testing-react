@@ -5,7 +5,7 @@ const Episode = (props)=> {
     const {id, image, name, season, number, summary, runtime} = episode;
     const imgsrc = image || './stranger_things.png';
 
-    return(<div className="episode" key={id}>
+    return(<div className="episode" key={id} data-testid={id}>
         <img className="episode-image" src={imgsrc} alt={imgsrc} />
         <div className="episode-info">
             <p className="episode-number">Season {season}, Episode {number}</p>
