@@ -13,7 +13,7 @@ const Display = (props) => {
     const handleClick = () => {
         fetchShow().then(data => {
             setShow(data);
-            
+            console.log(data)
             if (displayFunc) {
                 displayFunc();
             }
