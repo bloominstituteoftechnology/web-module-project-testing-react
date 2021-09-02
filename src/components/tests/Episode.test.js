@@ -4,28 +4,51 @@ import Episode from './../Episode';
 
 const testEpisode = {
     id:1,
-    name: "",
+    name: "Alieze",
     image: "http://static.tvmaze.com/uploads/images/medium_landscape/67/168918.jpg",
+    season: 1,
+    number: 1,
+    summary: "This is the summary",
+    runtime: 1
+}
+
+const testEpisodeWithoutImage = {
+    //Add in approprate test data structure here.
+    // copy above data without image
+    id:1,
+    name: "",
     season: 1,
     number: 1,
     summary: "",
     runtime: 1
 }
 
-const testEpisodeWithoutImage = {
-    //Add in approprate test data structure here.
-}
-
 test("renders without error", () => {
-
+    // Arrange
+    // this is where & how you pass props
+    render(<Episode episode={testEpisode}/>);
 });
 
 test("renders the summury test passed as prop", ()=>{
-    
+    // Arrange
+    render(<Episode episode={testEpisode}/>);
+    let summary = screen.getByText(/this is the summary/i);
+    // Act
+    // Assert
+    expect(summary).toHaveTextContent('This is the summary');
+    expect(summary).not.toBeNull();
+    expect(summary).toBeInTheDocument();
 });
 
 test("renders default image when image is not defined", ()=>{
-    
+    // Arrange
+    render(<Episode episode={testEpisodeWithoutImage}/>);
+    const image = screen.getByRole('img');
+    // Act
+    // Assert
+    expect(image).toBeInTheDocument();
+    //expect(image).toContainElement();
+    //expect(image).toHaveAttribute(imgsrc);
 })
 
 //Tasks
