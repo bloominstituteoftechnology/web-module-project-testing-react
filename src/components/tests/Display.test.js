@@ -12,7 +12,7 @@ const displayFunction = (data) => {
   console.log(data);
 };
 
-test("renders without props", () => {
+test("renders without any props", () => {
   render(<Display />);
 });
 
