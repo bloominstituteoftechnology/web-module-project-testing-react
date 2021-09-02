@@ -1,4 +1,51 @@
+import React from "react";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import Display from "../Display";
 
+const testDisplay = {
+  name: "Stranger Things",
+  summary: "summary",
+  seasons: [{ id: 0, name: "Season 1", episodes: [] }],
+};
+const displayFunction = (data) => {
+  console.log(data);
+};
+
+test("renders without props", () => {
+  render(<Display />);
+});
+
+test("display test component", () => {
+  render(<Display displayFunction={displayFunction} />);
+
+  const show = screen.queryByTestId("show-container");
+  waitFor(() => expect(show).toBeInTheDocument());
+
+  const button = screen.getByRole("button");
+  userEvent.click(button);
+});
+
+test("test seasons to display correct number of episodes", () => {
+  render(<Display show={testDisplay} />);
+
+  const button = screen.getByRole("button");
+  userEvent.click(button);
+  waitFor(() =>
+    expect(screen.getAllByTestId("season-option")).toHaveLength(
+      testDisplay.seasons.length
+    )
+  );
+});
+
+test("test call optional function", () => {
+  const mockClick = jest.fn();
+
+  render(<Display handleClick={mockClick} />);
+  const button = screen.getByRole("button");
+  userEvent.click(button);
+  waitFor(() => expect(mockClick).toHaveBeenCalledTimes(1));
+});
 
 
 
