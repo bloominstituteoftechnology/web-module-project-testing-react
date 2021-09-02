@@ -1,27 +1,96 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-
 import Show from './../Show';
 
 const testShow = {
     //add in approprate test data structure here.
+
+    image: {
+        medium: "https://static.tvmaze.com/uploads/images/medium_portrait/200/501942.jpg",
+        original: "https://static.tvmaze.com/uploads/images/original_untouched/200/501942.jpg"
+    },
+    name: "Test Show",
+    summary: "Test Summary blah blah blah",
+    
+    seasons: [
+        { id: 0, name: "Test Season 1", episodes: [] },
+        { id: 1, name: "Tet Season 2", episodes: [] },
+        { id: 2, name: "Test Season 3", episodes: [] },
+        {
+            id: 3, name: "Test Season 4", episodes: [{
+                id: 3,
+                image: null,
+                name: "",
+                number: 3,
+                runtime: 3,
+                season: 3,
+                summary: "Text to test if passed or not"
+            }]
+        }],
 }
 
-test('renders testShow and no selected Season without errors', ()=>{
+
+
+test('renders testShow and no selected Season without errors', () => {
+    render(<Show show={testShow} selectedSeason="none" />);
 });
+
+
 
 test('renders Loading component when prop show is null', () => {
+
+    render(<Show show={null} selectedSeason="none" />);
+
+    const loadingComponent = screen.getByTestId("loading-container");
+
+    expect(loadingComponent).toBeInTheDocument();
+    expect(loadingComponent).toBeTruthy();
+    expect(loadingComponent).toHaveTextContent(/fetching data.../i);
+
 });
 
-test('renders same number of options seasons are passed in', ()=>{
+
+
+test('renders same number of options seasons are passed in', () => {
+
+    render(<Show show={testShow} selectedSeason="none" />);
+
+    const seasonSelection = screen.getAllByTestId("season-option");
+
+    expect(seasonSelection.length).toBe(4);
+    expect(seasonSelection.length === 4).toBeTruthy();
 });
+
+
 
 test('handleSelect is called when an season is selected', () => {
+    
+    const mockHandleSelect = jest.fn(() => { return ("TEST") });
+    render(<Show show={testShow} selectedSeason="3" handleSelect={mockHandleSelect} />);
+    
+    const season3Option = screen.getByTestId("seasons");
+    
+    userEvent.selectOptions(season3Option, [2]);
 });
 
+
 test('component renders when no seasons are selected and when rerenders with a season passed in', () => {
+
+    const { rerender } = render(<Show show={testShow} selectedSeason="none" />);
+
+    let episodeDiv = document.getElementsByClassName("episode");
+ 
+    expect(episodeDiv.length).toBe(0);
+
+
+    rerender(<Show show={testShow} selectedSeason={3} />)
+
+    episodeDiv = document.getElementsByClassName("episode");
+
+    expect(episodeDiv.length).toBe(1);
 });
+
 
 //Tasks:
 //1. Build an example data structure that contains the show data in the correct format. A show should contain a name, a summary and an array of seasons, each with a id, name and (empty) list of episodes within them. Use console.logs within the client code if you need to to verify the structure of show data.
