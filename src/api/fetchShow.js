@@ -20,8 +20,17 @@ const formatSeasons = (allEpisodes) => {
   return seasons;
 };
 
-
 const fetchShow = () => {
+  return axios.get('https://api.tmaze.com/singlesearch/shows?q=stranger-things&embed=episodes')
+  .then(res => {
+    const {data} = res
+
+    return{name: data.name, image: data.image, summary: stripTags(data.summary), seasons: formatSeasons(data._embedded.episodes)}
+  })
+}
+
+
+const getShow = () => {
   return axios
     .get("https://api.tvmaze.com/singlesearch/shows?q=stranger+things&embed=episodes")
     .then(res => {
