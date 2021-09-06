@@ -15,7 +15,7 @@ const testEpisode = {
 const testEpisodeWithoutImage = {
     id: 2,
     name: "",
-    image: null,
+    image: '',
     season: 2,
     number: 2,
     summary: "",
@@ -28,15 +28,17 @@ test("renders without error", () => {
 
 test("renders the summary test passed as prop", ()=>{
     render(<Episode episode={testEpisode} />)
-    
-    const summary = screen.queryByText(/summary/i)
+    const summary = screen.queryAllByText(testEpisode.summary)
 
-    expect(summary).toBeInTheDocument();
-    expect(summary).toHaveTextContent(testEpisode.summary)
+    expect(summary).toBeTruthy()
+    
 });
 
 test("renders default image when image is not defined", ()=>{
     render(<Episode episode={testEpisodeWithoutImage} />)
+    const image = screen.queryAllByText(testEpisodeWithoutImage.image)
+
+    expect(image).toBeInTheDocument()
 })
 
 //Tasks
