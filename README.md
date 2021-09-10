@@ -2,6 +2,17 @@
 
 This module explored passing props into test components, rerendering components and using mocks to both monitor functional props and override the functionality of external modules. In this project, you will practice each of these practices in the testing of an application that displays TV show data.
 
+- [Unit Testing React Module Project: Stranger Things](#unit-testing-react-module-project-stranger-things)
+  - [Objectives](#objectives)
+  - [Introduction](#introduction)
+  - [Instructions](#instructions)
+    - [Task 1: Project Set Up](#task-1-project-set-up)
+    - [Task 2: Project Requirements](#task-2-project-requirements)
+      - [The Episode Component](#the-episode-component)
+    - [The Show Component](#the-show-component)
+    - [The Display Component](#the-display-component)
+    - [Stretch goals](#stretch-goals)
+
 ## Objectives
 - Understand how to test the effects of passing specific props into a component
 - Understand how to monitor the behavior of functional mock props.
