@@ -12,6 +12,7 @@ This module explored passing props into test components, rerendering components 
     - [The Show Component](#the-show-component)
     - [The Display Component](#the-display-component)
     - [Stretch goals](#stretch-goals)
+  - [Rick Mansfield's Pull/push trail for Testing React Proj.](#rick-mansfields-pullpush-trail-for-testing-react-proj)
 
 ## Objectives
 - Understand how to test the effects of passing specific props into a component
@@ -71,3 +72,7 @@ Get the project fired up and start using it as a user would. Try to go through t
 - Look up the `TVMaze` API. Add a dropdown with the titles of some other popular shows. Add the user sequence of choosing a different show to fetch data for different shows.
 
 - Add React Router, and add the functionality to click an episode and navigate to an episode page.
+
+## Rick Mansfield's Pull/push trail for Testing React Proj.
+
+- [Link](https://github.com/LambdaSchool/web-module-project-testing-react/pull/88)
