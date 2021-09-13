@@ -17,7 +17,7 @@ const testShow = {
         number: 3,
         runtime: 3,
         season: 3,
-        summary: "Season Summary, test text",
+        summary: "Summary, test text",
       }]
     },
   ]
@@ -48,14 +48,29 @@ test('renders same number of options seasons are passed in', ()=>{
 
 test('handleSelect is called when an season is selected', () => {
   //Arrange:
+  const handleSelect = jest.fn();
+  render(<Show show={testShow} selectedSeason={"none"} handleSelect={handleSelect}/>);
   //Act:
+  const selectSeason = screen.getByLabelText(/select a season/i)
+  userEvent.selectOptions(selectSeason, ["0"]);
   //Assert:
+  expect(handleSelect).toBeCalled();
+
 });
 
 test('component renders when no seasons are selected and when rerenders with a season passed in', () => {
-  //Arrange:
-  //Act:
-  //Assert:
+  //Arrange 1:
+  const { rerender } = render(<Show show={testShow} selectedSeason={"none"}/>);
+  //Act 1:
+  let episodesContainer = screen.queryByTestId("episodes-container");
+  //Assert 1:
+  expect(episodesContainer).toBeFalsy();
+  //Arrange 2:
+  rerender(<Show show={testShow} selectedSeason={2}/>);
+  //Act 2:
+  episodesContainer = screen.queryByTestId("episodes-container");
+  //Assert 2:
+  expect(episodesContainer).toBeTruthy();
 });
 
 //Tasks:
