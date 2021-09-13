@@ -23,11 +23,11 @@ const testEpisodeWithoutImage = {
     runtime: 1
 }
 
-test("renders without error", () => {
+test("1 renders without error", () => {
     render(<Episode episode={testEpisode}/>)
 });
 
-test("renders the summury test passed as prop", ()=>{
+test("2 renders the summury test passed as prop", ()=>{
     //Arrange 
     render(<Episode episode={testEpisode}/>)
     //Act
@@ -41,7 +41,7 @@ test("renders the summury test passed as prop", ()=>{
     
 });
 
-test("renders default image [i.e. alt text] when image is not defined", ()=>{
+test("3 renders default image [i.e. alt text] when image is not defined", ()=>{
     render(<Episode episode={testEpisodeWithoutImage}/>);
     const img = screen.getByAltText("./stranger_things.png");
     expect(img).toBeInTheDocument();
