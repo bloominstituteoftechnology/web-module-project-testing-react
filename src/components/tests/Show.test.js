@@ -5,11 +5,27 @@ import userEvent from '@testing-library/user-event';
 import Show from './../Show';
 
 const testShow = {
-    //add in approprate test data structure here.
+  name: "Test Show",
+  summary: "Test Summary, test text",
+  seasons: [
+    { id: 0, name: "Test Season 1", episodes: [] },
+    { id: 1, name: "Test Season 2", episodes: [] },
+    { id: 2, name: "Test Season 3", episodes: [{
+        id: 3,
+        image: null,
+        name: "",
+        number: 3,
+        runtime: 3,
+        season: 3,
+        summary: "Season Summary, test text",
+      }]
+    },
+  ]
 }
 
 test('renders testShow and no selected Season without errors', ()=>{
   //Arrange:
+  render(<Show show={testShow} selectedSeason={"none"}/>)
   //Act:
   //Assert:
 });
