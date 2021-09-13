@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Display from './../Display';
+
 // mockFetchShow is used in the last 2 tests, where it is called indirectly
 import mockFetchShow from '../../api/fetchShow';
 jest.mock('../../api/fetchShow');
@@ -31,7 +32,7 @@ const testShow = {
     summary: "Test summary text. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi pariatur ratione quos itaque, tempore dolore iste aut veritatis provident dolorem debitis, amet accusamus, quam adipisci distinctio quod eligendi similique ipsum!"
 }
 //2. Test that the Display component renders without any passed in props.
-test('12 Display component renders without any passed in props', () => {
+test('12 Display component renders without any passed in props ie. renders without errors', () => {
     render(<Display />);
     const imageSelector = screen.queryByAltText("header");
     expect(imageSelector).toBeInTheDocument();
@@ -51,6 +52,10 @@ test('13 when the fetch button is pressed, the show component will display with 
         const showContainer = screen.getByTestId("show-container");
         expect(showContainer).toBeInTheDocument();
     });
+    // alternative code to the above await...
+    //const show = await screen.findByTestId('show-container');
+    //expect(show).toBeInTheDocument();
+
     //5. Test that when the fetch button is pressed, the amount of select options rendered is equal to the amount of seasons in your test data.
     // Assert number of seasons equal to test data (3)
     const seasonOptions = screen.getAllByTestId("season-option");
