@@ -8,7 +8,7 @@ const testEpisode = {
     image: "http://static.tvmaze.com/uploads/images/medium_landscape/67/168918.jpg",
     season: 1,
     number: 1,
-    summary: "",
+    summary: "test",
     runtime: 1
 }
 
@@ -17,15 +17,20 @@ const testEpisodeWithoutImage = {
 }
 
 test("renders without error", () => {
-
+    render(<Episode Episode={testEpisode}/>)
 });
 
 test("renders the summury test passed as prop", ()=>{
-    
+    render(<Episode Episode={testEpisode}/>)
+    const summary = screen.queryByText(/test/i);
+    expect (summary).toHaveTextContent('test')
+
 });
 
 test("renders default image when image is not defined", ()=>{
-    
+    render(<Episode Episode={testEpisodeWithoutImage}/>)
+    const image= screen.queryByAltText('./stranger_things.png')
+    expect(image).toBeInTheDocument();
 })
 
 //Tasks
