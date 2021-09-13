@@ -3,15 +3,71 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import Display from "./../Display";
+import mockFetch from "./../../api/fetchShow";
+jest.mock("./../../api/fetchShow")
+ 
+const testShow = {
+  name: "Test Show",
+  summary: "Test Summary, test text",
+  seasons: [
+    { id: 0, name: "Test Season 1", episodes: [] },
+    { id: 1, name: "Test Season 2", episodes: [] },
+    { id: 2, name: "Test Season 3", episodes: [{
+        id: 3,
+        image: null,
+        name: "",
+        number: 3,
+        runtime: 3,
+        season: 3,
+        summary: "Summary, test text",
+      }]
+    },
+  ]
+}
 
 test("renders without errors", () => {
-
+  render(<Display />);
 })
 
+test("when the fetch button is pressed, the show component will display", async () => {
+  //Arrange:
+  mockFetch.mockResolvedValueOnce(testShow);
+  render(<Display />);
+  //Act:
+  const button = screen.getByRole("button")
+  userEvent.click(button);
+  //Assert:
+  const show = await screen.findByTestId("show-container")
+  expect(show).toBeInTheDocument();
+})
 
+test("when the fetch button is pressed, the amount of select options rendered is equal to the amount of seasons in your test data", async () => {
+  //Arrange:
+  mockFetch.mockResolvedValueOnce(testShow);
+  render(<Display />);
+  //Act:
+  const button = screen.getByRole("button")
+  userEvent.click(button);
+  //Assert:
+  await waitFor(() => {
+    const seasonOptions = screen.queryAllByTestId("season-option");
+    expect(seasonOptions).toHaveLength(3);
+  })
+})
 
-
-
+test("when the button is pressed displayFunc is called", async () => {
+   //Arrange:
+   mockFetch.mockResolvedValueOnce(testShow);
+   const displayFunc = jest.fn();
+   render(<Display displayFunc={displayFunc}/>);
+   //Act:
+   const button = screen.getByRole("button")
+   userEvent.click(button);
+   //Assert:
+   await waitFor(() => {
+     expect(displayFunc).toHaveBeenCalled();
+   })
+})
 
 ///Tasks:
 //1. Add in nessisary imports and values to establish the testing suite.
