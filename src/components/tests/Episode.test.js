@@ -8,7 +8,7 @@ const testEpisode = {
     image: "http://static.tvmaze.com/uploads/images/medium_landscape/67/168918.jpg",
     season: 1,
     number: 1,
-    summary: "",
+    summary: "I have no idea what to summarize...",
     runtime: 1
 }
 
@@ -17,11 +17,12 @@ const testEpisodeWithoutImage = {
 }
 
 test("renders without error", () => {
-
+  render(<Episode episode={true}/>);
 });
 
 test("renders the summury test passed as prop", ()=>{
-    
+    render(<Episode summary={true}/>)
+    const summaryStatement = screen.
 });
 
 test("renders default image when image is not defined", ()=>{
