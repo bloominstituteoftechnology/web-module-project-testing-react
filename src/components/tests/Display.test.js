@@ -35,17 +35,46 @@ test('12 Display component renders without any passed in props', ()=>{
     expect(imageSelector).toBeInTheDocument();
 });
 
+//4. Test that when the fetch button is pressed, the show component will display. Make sure to account for the api call and change of state in building your test.
 
+test('13 when the fetch button is pressed, the show component will display with correct # of seasons', async ()=>{
+    // Arrange
+    render(<Display />);
+    mockFetchShow.mockResolvedValueOnce(testShow);
+    // Act
+    const button = screen.getByRole("button");
+    userEvent.click(button);
+    // Assert the show-container div displays
+    await waitFor(()=> {
+        const showContainer = screen.getByTestId("show-container");
+        expect(showContainer).toBeInTheDocument();
+    });
+//5. Test that when the fetch button is pressed, the amount of select options rendered is equal to the amount of seasons in your test data.
+    // Assert number of seasons equal to test data (3)
+    const seasonOptions = screen.getAllByTestId("season-option");
+    expect(seasonOptions).toHaveLength(3);
 
+});
 
+test("14 calls displayFunc when button is clicked", async ()=>{
+    mockFetchShow.mockResolvedValue(testShow);
+    const mockDisplayFunc = jest.fn();
 
+    //Arrange: renders component
+    render(<Display displayFunc={mockDisplayFunc}/>)
 
+    //Act: Click button
+    const button = screen.getByRole("button");
+    userEvent.click(button);
 
-
-
-
-
-
+    // //Assert: ?
+    await waitFor(()=>{
+        expect(mockDisplayFunc.mock.calls.length === 1).toBeTruthy();
+        expect(mockDisplayFunc.mock.calls.length).toBe(1);
+        expect(mockDisplayFunc.mock.calls).toHaveLength(1);
+        expect(mockDisplayFunc).toHaveBeenCalled();
+    });
+});
 
 ///Tasks:
 //1. Add in nessisary imports and values to establish the testing suite.
