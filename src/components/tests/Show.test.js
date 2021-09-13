@@ -4,11 +4,36 @@ import userEvent from '@testing-library/user-event';
 
 import Show from './../Show';
 
+//NOTE NOTE NOTE I had to console.log('FETCH SHOW DATA',data); on line 29 of fetchShow.js to get the proper structure. I started by mimicking the format from lines 24-37 of src/api/fetchShow.js and expanding that to inclue the data I found on the console.log
 const testShow = {
     //add in approprate test data structure here.
+
+    image: {
+        medium: "https://static.tvmaze.com/uploads/images/medium_portrait/200/501942.jpg",
+        original: "https://static.tvmaze.com/uploads/images/original_untouched/200/501942.jpg"
+    },//I retrieved this image data from the chrome console from the res data
+    name: "Test Show",
+    summary: "Test Summary blah blah blah",
+    //note seasons is from fetchShow.js line 34 seasons: formatSeasons(data._embedded.episodes). Which is becuase the res data returns _embedded as episodes: Array
+    seasons: [
+        { id: 0, name: "Test Season 1", episodes: [] },
+        { id: 1, name: "Tet Season 2", episodes: [] },
+        { id: 2, name: "Test Season 3", episodes: [] },
+        {
+            id: 3, name: "Test Season 4", episodes: [{
+                id: 3,
+                image: null,
+                name: "",
+                number: 3,
+                runtime: 3,
+                season: 3,
+                summary: "Text to test if passed or not"
+            }]
+        }],//the res data has more to it but this is all our app is useing. I put it in the same order as the chrome console.log of the response data just as can see it there on in postman. 
 }
 
-test('renders testShow and no selected Season without errors', ()=>{
+test('1 renders testShow and no selected Season without errors', ()=>{
+    render(<Show show={testShow} selectedSeason="none" />);
 });
 
 test('renders Loading component when prop show is null', () => {
