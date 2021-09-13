@@ -93,8 +93,6 @@ test("component renders when no seasons are selected and when rerenders with a s
   const { rerender } = render(<Show show={testShow} selectedSeason={"none"} />);
 
   let episodeContainer = screen.queryByTestId("episodes-container");
-  //   let options = screen.queryByLabelText(/select a season/i);
-  //   userEvent.selectOptions(options, ["none"]);
 
   expect(episodeContainer).not.toBeInTheDocument();
 

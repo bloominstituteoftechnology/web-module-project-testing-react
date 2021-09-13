@@ -25,18 +25,16 @@ const testEpisodeWithoutImage = {
 };
 
 test("renders without error", () => {
-  render(<Episode />);
+  render(<Episode episode={testEpisode} />);
 });
 
 test("renders the summary test passed as prop", () => {
   render(<Episode episode={testEpisode} />);
-
   const seasonEpisode = screen.queryByText(/season 1, episode 1/i);
   const runTime = screen.queryByText(/1 minutes/i);
   const image = screen.queryByAltText(
     "http://static.tvmaze.com/uploads/images/medium_landscape/67/168918.jpg"
   );
-
   expect(seasonEpisode).toBeInTheDocument();
   expect(runTime).toBeInTheDocument();
   expect(image).toBeTruthy();
@@ -44,9 +42,7 @@ test("renders the summary test passed as prop", () => {
 
 test("renders default image when image is not defined", () => {
   render(<Episode episode={testEpisodeWithoutImage} />);
-
   const image = screen.queryByAltText("./stranger_things.png");
-
   expect(image).toBeInTheDocument();
 });
 
