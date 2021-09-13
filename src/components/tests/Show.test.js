@@ -25,21 +25,25 @@ const testShow = {
 
 test('renders testShow and no selected Season without errors', ()=>{
   //Arrange:
-  render(<Show show={testShow} selectedSeason={"none"}/>)
-  //Act:
-  //Assert:
+  render(<Show show={testShow} selectedSeason={"none"}/>);
 });
 
 test('renders Loading component when prop show is null', () => {
   //Arrange:
+  render(<Show show={null}/>);
   //Act:
+  const loadingContainer = screen.queryByTestId("loading-container");
   //Assert:
+  expect(loadingContainer).toBeInTheDocument();
 });
 
 test('renders same number of options seasons are passed in', ()=>{
   //Arrange:
+  render(<Show show={testShow} selectedSeason={"none"}/>);
   //Act:
+  const seasonOptions = screen.queryAllByTestId("season-option");
   //Assert:
+  expect(seasonOptions).toHaveLength(3);
 });
 
 test('handleSelect is called when an season is selected', () => {
