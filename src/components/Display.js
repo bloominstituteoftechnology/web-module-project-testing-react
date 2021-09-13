@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-import Loading from "./Loading";
 import Show from "./Show";
 
 import fetchShow from '../api/fetchShow';
