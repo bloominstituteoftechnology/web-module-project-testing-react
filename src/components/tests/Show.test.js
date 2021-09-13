@@ -32,20 +32,37 @@ const testShow = {
         }],//the res data has more to it but this is all our app is useing. I put it in the same order as the chrome console.log of the response data just as can see it there on in postman. 
 }
 
-test('1 renders testShow and no selected Season without errors', ()=>{
+test('5 renders testShow and no selected Season without errors', () => {
     render(<Show show={testShow} selectedSeason="none" />);
 });
 
-test('renders Loading component when prop show is null', () => {
+test('6 renders Loading component when prop show is null', () => {
+    //Arrange
+    render(<Show show={null} selectedSeason="none" />);
+    //Act
+    const loadingComponent = screen.getByTestId("loading-container");
+    //Assert
+    expect(loadingComponent).toBeInTheDocument();
+    expect(loadingComponent).toBeTruthy();
+    expect(loadingComponent).toHaveTextContent(/fetching data.../i);
 });
 
-test('renders same number of options seasons are passed in', ()=>{
+test('7 renders same number of options seasons are passed in', () => {
+
+        //Arrange - render
+        render(<Show show={testShow} selectedSeason="none" />);
+        //Act - const/screen
+        const seasonSelection = screen.getAllByTestId("season-option");//found in Show.js
+        //Assert - expect
+            //note that we're only working with one show namely Stranger Things. And in this case there are only 4 seasons to choose from... so. 
+        expect(seasonSelection.length).toBe(4);
+        expect(seasonSelection.length === 4).toBeTruthy();
 });
 
-test('handleSelect is called when an season is selected', () => {
+test('8 handleSelect is called when an season is selected', () => {
 });
 
-test('component renders when no seasons are selected and when rerenders with a season passed in', () => {
+test('9 component renders when no seasons are selected and when rerenders with a season passed in', () => {
 });
 
 //Tasks:
