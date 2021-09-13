@@ -26,7 +26,7 @@ const fetchShow = () => {
     .get("https://api.tvmaze.com/singlesearch/shows?q=stranger+things&embed=episodes")
     .then(res => {
       const { data } = res;
-      
+      console.log('FETCH SHOW DATA',data);
       return {
         name: data.name,
         image: data.image,
