@@ -58,8 +58,10 @@ test('13 when the fetch button is pressed, the show component will display with 
 
     //5. Test that when the fetch button is pressed, the amount of select options rendered is equal to the amount of seasons in your test data.
     // Assert number of seasons equal to test data (3)
-    const seasonOptions = screen.getAllByTestId("season-option");
-    expect(seasonOptions).toHaveLength(3);
+    await waitFor(() => {
+        const seasonOptions = screen.getAllByTestId("season-option");
+        expect(seasonOptions).toHaveLength(3);
+    });
 
 });
 
