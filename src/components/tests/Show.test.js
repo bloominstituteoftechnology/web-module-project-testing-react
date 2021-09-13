@@ -9,18 +9,33 @@ const testShow = {
 }
 
 test('renders testShow and no selected Season without errors', ()=>{
+  //Arrange:
+  //Act:
+  //Assert:
 });
 
 test('renders Loading component when prop show is null', () => {
+  //Arrange:
+  //Act:
+  //Assert:
 });
 
 test('renders same number of options seasons are passed in', ()=>{
+  //Arrange:
+  //Act:
+  //Assert:
 });
 
 test('handleSelect is called when an season is selected', () => {
+  //Arrange:
+  //Act:
+  //Assert:
 });
 
 test('component renders when no seasons are selected and when rerenders with a season passed in', () => {
+  //Arrange:
+  //Act:
+  //Assert:
 });
 
 //Tasks:
