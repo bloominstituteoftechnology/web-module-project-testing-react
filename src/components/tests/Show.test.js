@@ -43,12 +43,11 @@ test("renders testShow and no selected Season without errors", () => {
 
   const name = screen.queryByText(/test series/i);
   const summary = screen.queryByText(/a test summary/i);
-  //   const showContainer = screen.queryByTestId("show-container");
-  //   const option = screen.queryByLabelText(/select a season/i);
-  //   userEvent.selectOptions(option, ["none"]);
+  const showContainer = screen.queryByTestId("show-container");
 
   expect(name).toBeInTheDocument();
   expect(summary).toBeInTheDocument();
+  expect(showContainer).toBeInTheDocument();
 });
 
 test("renders Loading component when prop show is null", () => {
@@ -56,16 +55,55 @@ test("renders Loading component when prop show is null", () => {
 
   const loadingContainer = screen.queryByTestId("loading-container");
   const loadingString = screen.queryByText(/fetching data.../i);
+  const showContainer = screen.queryByTestId("show-container");
 
   expect(loadingContainer).toBeInTheDocument();
   expect(loadingString).toBeInTheDocument();
+  expect(showContainer).not.toBeInTheDocument();
 });
 
-test("renders same number of options seasons are passed in", () => {});
+test("renders same number of options seasons are passed in", () => {
+  render(<Show show={testShow} selectedSeason={"none"} />);
 
-test("handleSelect is called when an season is selected", () => {});
+  const options = screen.queryAllByTestId("season-option");
 
-test("component renders when no seasons are selected and when rerenders with a season passed in", () => {});
+  expect(options).toHaveLength(4);
+  expect(options).not.toHaveLength(0);
+});
+
+test("handleSelect is called when an season is selected", () => {
+  const mockHandleSelect = jest.fn();
+
+  render(
+    <Show
+      show={testShow}
+      selectedSeason={"none"}
+      handleSelect={mockHandleSelect}
+    />
+  );
+
+  const options = screen.queryByLabelText(/select a season/i);
+
+  userEvent.selectOptions(options, ["1"]);
+
+  expect(mockHandleSelect).toBeCalledTimes(1);
+});
+
+test("component renders when no seasons are selected and when rerenders with a season passed in", () => {
+  const { rerender } = render(<Show show={testShow} selectedSeason={"none"} />);
+
+  let episodeContainer = screen.queryByTestId("episodes-container");
+  //   let options = screen.queryByLabelText(/select a season/i);
+  //   userEvent.selectOptions(options, ["none"]);
+
+  expect(episodeContainer).not.toBeInTheDocument();
+
+  rerender(<Show show={testShow} selectedSeason={"1"} />);
+
+  episodeContainer = screen.queryByTestId("episodes-container");
+
+  expect(episodeContainer).toBeInTheDocument();
+});
 
 //Tasks:
 //1. Build an example data structure that contains the show data in the correct format. A show should contain a name, a summary and an array of seasons, each with a id, name and (empty) list of episodes within them. Use console.logs within the client code if you need to to verify the structure of show data.
