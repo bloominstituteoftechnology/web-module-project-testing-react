@@ -59,10 +59,35 @@ test('7 renders same number of options seasons are passed in', () => {
         expect(seasonSelection.length === 4).toBeTruthy();
 });
 
-test('8 handleSelect is called when an season is selected', () => {
+
+//My Own extra test out of curiosity... 
+test('8 Episode component is not loaded when no season is selected', () => {
+    render(<Show show={testShow} selectedSeason="none" />);
+    const theEpisodeDiv = document.getElementsByClassName("episode");
+    expect(theEpisodeDiv.length).toBe(0);
 });
 
-test('9 component renders when no seasons are selected and when rerenders with a season passed in', () => {
+test('9-A handleSelect is called when an season is selected', () => {
+    //Arrange - render -  gets a mock function as the prop this time.
+    const mockHandleSelect = jest.fn(() => { return ("TEST") });
+    render(<Show show={testShow} selectedSeason="2" handleSelect={mockHandleSelect} />);
+    //Act - const/screen - could pick anything. Tried Season 2. 
+    const season2Option = screen.getByTestId("seasons");//had to add data-testid="seasons" to Show.js line 16
+    //Assert - expect
+    userEvent.selectOptions(season2Option, [1]);
+});
+
+test('9-B another way to test handleSelct is called when seasoned selected', () => {
+    const handleSelect = jest.fn();
+    render(<Show show={testShow} selectedSeason={"none"} handleSelect={handleSelect}/>);
+    const selectSeason = screen.getByLabelText(/Select A Season/i)
+    userEvent.selectOptions(selectSeason, ['0']);
+    expect(handleSelect).toBeCalledTimes(1);
+});
+
+
+
+test('10 component renders when no seasons are selected and when rerenders with a season passed in', () => {
 });
 
 //Tasks:
