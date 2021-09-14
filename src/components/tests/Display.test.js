@@ -20,3 +20,40 @@
 //4. Test that when the fetch button is pressed, the show component will display. Make sure to account for the api call and change of state in building your test.
 //5. Test that when the fetch button is pressed, the amount of select options rendered is equal to the amount of seasons in your test data.
 //6. Notice the optional functional prop passed in to the Display component client code. Test that when the fetch button is pressed, this function is called.
+
+ 
+  
+  
+
+ 
+  
+ 
+  
+  
+
+ 
+  
+ 
+  
+  
+
+ 
+  
+ 
+  
+  
+
+ 
+  
+ 
+  
+  
+
+ 
+  
+ 
+  
+  
+
+ 
+  
