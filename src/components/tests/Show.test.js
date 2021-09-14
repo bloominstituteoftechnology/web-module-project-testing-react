@@ -33,10 +33,6 @@ test('component renders when no seasons are selected and when rerenders with a s
 
  
   
-  
-
- 
-  
  
   
   
@@ -73,6 +69,22 @@ test('component renders when no seasons are selected and when rerenders with a s
 
  
   
+ 
+  
+  
+
+ 
+  
+ 
+  
+  
+
+ 
+  
+ 
+  
+  
+
  
   
   
