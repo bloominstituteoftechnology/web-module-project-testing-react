@@ -100,6 +100,14 @@ test("on fetch button click, renders select options equal to the amount of seaso
   expect(options).not.toHaveLength(0);
 });
 
+test("on fetch button click, if displayFunc is truthy, displayFunc is called", () => {
+  //   const mockDisplayFunc = jest.fn();
+  //   render(<Display displayFunc={true} displayFunc={mockDisplayFunc} />);
+  //   const button = screen.getByRole("button");
+  //   userEvent.click(button);
+  //   expect(mockDisplayFunc).toBeCalledTimes(1);
+});
+
 ///Tasks:
 //1. Add in nessisary imports and values to establish the testing suite.
 //2. Test that the Display component renders without any passed in props.
