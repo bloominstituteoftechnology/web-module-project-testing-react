@@ -1,16 +1,59 @@
+import React from 'react';
+import { render, screen, waitFor } from '@testing-library/react';
+
+import Display from '../Display';
+import userEvent from '@testing-library/user-event';
+import { fetchShow as mockFetchShow } from '../../api/fetchShow'
+
+jest.mock('../../api/fetchShow')
+
+const testShow = {
+    name: 'test show name', 
+    summary: 'test summary',
+    seasons: [
+        {
+        id: '0', 
+        name: 'season 1',
+        episodes: []
+    },
+    {
+        id: '1', 
+        name: 'season 2',
+        episodes: []
+    },
+    {
+        id: '2', 
+        name: 'season 3',
+        episodes: []
+    },
+    ]
+
+}
 
 
+test('Display renders without any passed in props', () => {
+    render(<Display />)
 
+})
 
+test('when the fetch button is pressed, the show component displays', async () => {
+// mockFetchShow.mockResolvedValueOnce(testShow)
 
+    const button = screen.queryByRole('button')
+    userEvent.click(button)
 
+    await waitFor(() => {
+        const showContainer = screen.getByTestId('show-container')
+        expect(showContainer).toBeInTheDocument()
+        screen.debug()
+    })
+    
 
+})
 
+test('when the fetch button is pressed, the amount of select options rendered is equal to the amounts of seasons in your data', () => {
 
-
-
-
-
+})
 
 
 ///Tasks:
