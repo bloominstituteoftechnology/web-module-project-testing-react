@@ -1,26 +1,187 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
-import Show from './../Show';
+import Show from "./../Show";
 
 const testShow = {
-    //add in approprate test data structure here.
-}
+  //add in approprate test data structure here.
 
-test('renders testShow and no selected Season without errors', ()=>{
+  name: "Stranger Things",
+  image: {
+    medium:
+      "https://static.tvmaze.com/uploads/images/medium_portrait/200/501942.jpg",
+    original:
+      "https://static.tvmaze.com/uploads/images/original_untouched/200/501942.jpg",
+  },
+  summary:
+    "A love letter to the '80s classics that captivated a generation, Stranger Things is set in 1983 Indiana, where a young boy vanishes into thin air. As friends, family and local police search for answers, they are drawn into an extraordinary mystery involving top-secret government experiments, terrifying supernatural forces and one very strange little girl.",
+  seasons: [
+    {
+      id: 0,
+      name: "Season 1",
+      episodes: [
+        {
+          id: 553946,
+          url: "https://www.tvmaze.com/episodes/553946/stranger-things-1x01-chapter-one-the-vanishing-of-will-byers",
+          name: "Chapter One: The Vanishing of Will Byers",
+          season: 1,
+          number: 1,
+          type: "regular",
+          airdate: "2016-07-15",
+          airtime: "",
+          airstamp: "2016-07-15T12:00:00+00:00",
+          runtime: 49,
+          image:
+            "https://static.tvmaze.com/uploads/images/medium_landscape/342/855786.jpg",
+          summary:
+            "A young boy mysteriously disappears, and his panicked mother demands that the police find him. Meanwhile, the boy's friends conduct their own search, and meet a mysterious girl in the forest.",
+          _links: {
+            self: {
+              href: "https://api.tvmaze.com/episodes/553946",
+            },
+          },
+        },
+        {
+          id: 578663,
+          url: "https://www.tvmaze.com/episodes/578663/stranger-things-1x02-chapter-two-the-weirdo-on-maple-street",
+          name: "Chapter Two: The Weirdo on Maple Street",
+          season: 1,
+          number: 2,
+          type: "regular",
+          airdate: "2016-07-15",
+          airtime: "",
+          airstamp: "2016-07-15T12:00:00+00:00",
+          runtime: 56,
+          image:
+            "https://static.tvmaze.com/uploads/images/medium_landscape/342/855787.jpg",
+          summary:
+            "While the search for the missing Will continues, Joyce tells Jim about a call she apparently received from her son. Meanwhile, Jane warns Mike that there are bad people after her, and he realizes that she knows what happened to Will.",
+          _links: {
+            self: {
+              href: "https://api.tvmaze.com/episodes/578663",
+            },
+          },
+        },
+      ],
+    },
+    {
+      id: 1,
+      name: "Season 2",
+      episodes: [
+        {
+          id: 909340,
+          url: "https://www.tvmaze.com/episodes/909340/stranger-things-2x01-chapter-one-madmax",
+          name: "Chapter One: MADMAX",
+          season: 2,
+          number: 1,
+          type: "regular",
+          airdate: "2017-10-27",
+          airtime: "",
+          airstamp: "2017-10-27T12:00:00+00:00",
+          runtime: 48,
+          image:
+            "https://static.tvmaze.com/uploads/images/medium_landscape/342/855794.jpg",
+          summary:
+            "One year after the events with the Upside Down and the Demogorgon, Will meets with a government doctor. The boys discover that there's a new player in town, and Jim pays a visit to El.",
+          _links: {
+            self: {
+              href: "https://api.tvmaze.com/episodes/909340",
+            },
+          },
+        },
+        {
+          id: 909342,
+          url: "https://www.tvmaze.com/episodes/909342/stranger-things-2x02-chapter-two-trick-or-treat-freak",
+          name: "Chapter Two: Trick or Treat, Freak",
+          season: 2,
+          number: 2,
+          type: "regular",
+          airdate: "2017-10-27",
+          airtime: "",
+          airstamp: "2017-10-27T12:00:00+00:00",
+          runtime: 56,
+          image:
+            "https://static.tvmaze.com/uploads/images/medium_landscape/132/332034.jpg",
+          summary:
+            "The boys go trick-or-treating on Halloween, and Will has another vision. Meanwhile, El relieves the days following her escape from the Upside Down, and Dustin finds something in the garbage can.",
+          _links: {
+            self: {
+              href: "https://api.tvmaze.com/episodes/909342",
+            },
+          },
+        },
+        {
+          id: 909343,
+          url: "https://www.tvmaze.com/episodes/909343/stranger-things-2x03-chapter-three-the-pollywog",
+          name: "Chapter Three: The Pollywog",
+          season: 2,
+          number: 3,
+          type: "regular",
+          airdate: "2017-10-27",
+          airtime: "",
+          airstamp: "2017-10-27T12:00:00+00:00",
+          runtime: 51,
+          image:
+            "https://static.tvmaze.com/uploads/images/medium_landscape/132/332039.jpg",
+          summary:
+            "Dustin takes in a stray and calls it D'Artagnan. However, his plans to show it to Mr. Clarke don't go as intended. Meanwhile, Max tries to convince Mike to let her join the group, El sneaks out to pay her friends a visit, and Will decides to take a stand and face his fears.",
+          _links: {
+            self: {
+              href: "https://api.tvmaze.com/episodes/909343",
+            },
+          },
+        },
+      ],
+    },
+  ],
+};
+
+test("renders testShow and no selected Season without errors", () => {
+  render(<Show show={testShow} selectedSeason={"none"} handleSelect={null} />);
 });
 
-test('renders Loading component when prop show is null', () => {
+test("renders Loading component when prop show is null", () => {
+  render(<Show show={null} selectedSeason={"none"} handleSelect={null} />);
+  const message = screen.queryByText(/Fetching data.../i);
+  expect(message).toBeInTheDocument();
+  expect(message).toBeTruthy();
+  expect(message).toHaveTextContent("Fetching data...");
 });
 
-test('renders same number of options seasons are passed in', ()=>{
+test("renders same number of options seasons are passed in", () => {
+  render(<Show show={testShow} selectedSeason={"none"} handleSelect={null} />);
+  const options = screen.queryAllByTestId("season-option");
+  expect(options).toHaveLength(testShow.seasons.length);
 });
 
-test('handleSelect is called when an season is selected', () => {
+test("handleSelect is called when an season is selected", () => {
+  const fakeHandleSelect = jest.fn();
+
+  render(
+    <Show
+      show={testShow}
+      selectedSeason={"none"}
+      handleSelect={fakeHandleSelect}
+    />
+  );
+  const options = screen.queryAllByTestId("season-option");
+
+  userEvent.selectOptions(screen.getByLabelText("Select A Season"), "0");
+  expect(fakeHandleSelect.mock.results.length === 1).toBeTruthy();
+  expect(fakeHandleSelect.mock.results.length).toBe(1);
+  expect(fakeHandleSelect.mock.results).toHaveLength(1);
+  expect(fakeHandleSelect).toBeCalledTimes(1);
 });
 
-test('component renders when no seasons are selected and when rerenders with a season passed in', () => {
+test("component renders when no seasons are selected and then rerenders with a season passed in", () => {
+  const { rerender } = render(<Show show={testShow} selectedSeason={"none"} />);
+  let episodes = screen.queryByTestId("episodes-container");
+  expect(episodes).not.toBeInTheDocument();
+
+  rerender(<Show show={testShow} selectedSeason={"1"} />);
+  episodes = screen.queryByTestId("episodes-container");
+  expect(episodes).toBeInTheDocument();
 });
 
 //Tasks:
