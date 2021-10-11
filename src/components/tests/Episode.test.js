@@ -8,7 +8,7 @@ const testEpisode = {
     image: "http://static.tvmaze.com/uploads/images/medium_landscape/67/168918.jpg",
     season: 1,
     number: 1,
-    summary: "",
+    summary: "Here is a custom summary for the test episode. Amazing!",
     runtime: 1
 }
 
@@ -17,11 +17,19 @@ const testEpisodeWithoutImage = {
 }
 
 test("renders without error", () => {
-
+    render(<Episode episode={testEpisode} />);
 });
 
-test("renders the summury test passed as prop", ()=>{
-    
+test("renders the summary test passed as prop", ()=>{
+    //arrange
+    render(<Episode episode={testEpisode} />);
+    //act
+    const summary = screen.queryByText(testEpisode.summary)
+    //assert
+    expect(summary).toBeInTheDocument();
+    expect(summary).toHaveTextContent(/Here is a custom summary for the test episode. Amazing!/i);
+    expect(summary).not.toBeNull();
+
 });
 
 test("renders default image when image is not defined", ()=>{
