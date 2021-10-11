@@ -6,15 +6,50 @@ import Show from './../Show';
 
 const testShow = {
     //add in approprate test data structure here.
+    name: "Test Series",
+    summary: "A test summary",
+    image: {
+      medium:
+        "https://static.tvmaze.com/uploads/images/medium_portrait/200/501942.jpg",
+      original:
+        "https://static.tvmaze.com/uploads/images/original_untouched/200/501942.jpg",
+    },
+    seasons: [
+      {
+        id: 0,
+        name: "Test 1",
+        episodes: [],
+      },
+      {
+        id: 1,
+        name: "Test 2",
+        episodes: [],
+      },
+      {
+        id: 2,
+        name: "Test 3",
+        episodes: [],
+      },
+      {
+        id: 3,
+        name: "Test 4",
+        episodes: [],
+      },
+    ],
 }
 
 test('renders testShow and no selected Season without errors', ()=>{
+    render(<Show show={testShow} selectedSeason={"none"} />)
 });
 
 test('renders Loading component when prop show is null', () => {
+    const name = screen.queryByText(/test series/i);
+  const summary = screen.queryByText(/a test summary/i);
 });
 
 test('renders same number of options seasons are passed in', ()=>{
+//     expect(name).toBeInTheDocument();
+//   expect(summary).toBeInTheDocument();
 });
 
 test('handleSelect is called when an season is selected', () => {
