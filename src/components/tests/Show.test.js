@@ -6,21 +6,62 @@ import Show from './../Show';
 
 const testShow = {
     //add in approprate test data structure here.
+    name: '',
+    summary: '',
+    seasons: [
+        {
+            id: 1,
+            name: 'Season1',
+            episodes: []
+        },
+        {
+            id: 2,
+            name: 'Season2',
+            episodes: []
+        },
+        {
+            id: 3,
+            name: 'Season3',
+            episodes: []
+        },
+    ]
 }
 
 test('renders testShow and no selected Season without errors', ()=>{
+    render(<Show show={testShow} selectedSeason='none' />);
 });
 
 test('renders Loading component when prop show is null', () => {
+    render(<Show show={null} />);
+    const loading = screen.queryByTestId("loading-container");
+    expect(loading).toBeInTheDocument();
 });
 
 test('renders same number of options seasons are passed in', ()=>{
+    render(<Show show={testShow} selectedSeason='none' />);
+    const seasons = screen.queryAllByTestId('season-option');
+    expect(seasons).toHaveLength(3);
 });
 
 test('handleSelect is called when an season is selected', () => {
+    const mockHandleSelect = jest.fn();
+    render(<Show show={testShow} selectedSeason={[0]} handleSelect={mockHandleSelect} />);
+    const select = screen.getByLabelText(/select a season/i);
+    userEvent.selectOptions(select, ['1']);
+    expect(mockHandleSelect).toHaveBeenCalledTimes(1);
 });
 
 test('component renders when no seasons are selected and when rerenders with a season passed in', () => {
+    const { rerender } = render(<Show show={testShow} selectedSeason='none' />);
+
+    render(<Show show={testShow} selectedSeason='none' />);
+    let episode = screen.queryByTestId('episodes-container');
+    expect(episode).not.toBeInTheDocument();
+
+    rerender(<Show show={testShow} selectedSeason={[0]} />);
+    episode = screen.queryByTestId('episodes-container');
+    // console.log('THIS IS THE CONSOLE LOG WITHOUT SEASON', episode)
+    expect(episode).toBeInTheDocument();
 });
 
 //Tasks:
