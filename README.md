@@ -9,7 +9,7 @@ This module explored passing props into test components, rerendering components 
 - Learn how to mock the use an external module
 
 ## Introduction
-As a developer, you will often be asked to write tests for the feature you are building and even on features other developers have built. In this project, we will mimic a situation where you are asked to test someone else's code.
+As a developer, you will often be asked to write tests for the feature you are building and even on features other developers have built. In this project, we will mimic a situation where you are asked to test someone else's code
 
 Get the project fired up and start using it as a user would. Try to go through the user sequences for this feature that you think users would go through. Once you have those in mind, you will have an idea of what to test in your application.
 
