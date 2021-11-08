@@ -14,18 +14,33 @@ const testEpisode = {
 
 const testEpisodeWithoutImage = {
     //Add in approprate test data structure here.
+    id:1,
+    name: "The Crazy Episode",
+    image: "",
+    season: 3,
+    number: 2,
+    summary: "Things get crazy",
+    runtime: 1,
 }
 
 test("renders without error", () => {
-
+    render(<Episode episode={[]} />);
 });
 
 test("renders the summury test passed as prop", ()=>{
-    
+    render(<Episode episode={[testEpisode]} />);
+    const summary = screen.getByText(`${testEpisode.summary}`);
+    expect(summary).toBeInTheDocument();
+    expect(summary).toHaveTextContent();
+    expect(summary).toBeTruthy(); 
 });
 
 test("renders default image when image is not defined", ()=>{
-    
+    render(<Episode episode={testEpisodeWithoutImage} />);
+    const data = screen.getByAltText("./stranger_things.png");
+    expect(data).toBeInTheDocument();
+    expect(data.alt).toEqual("./stranger_things.png");
+    expect(data).toBeTruthy();
 })
 
 //Tasks
