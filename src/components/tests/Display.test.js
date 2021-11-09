@@ -1,6 +1,45 @@
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import Display from './../Display';
+import fetchShow from '../../api/fetchShow';
 
-test("renders without error", ()=>{
+const testShow = {
+  
+    name: "test name",
+    summary: "bla bla",
+    seasons:[{
+        id: 123,
+        name: "Season 1",
+        episodes:[]
+    },
+    {
+        id: 234,
+        name: "Season 2",
+        episodes:[]
+    },
+    {
+        id: 345,
+        name: "Season 3",
+        episodes:[]
+    }
+    ]
+}
+test("renders without props", ()=>{
+    render(<Display />);
 })
+test("Test that when the fetch button is pressed", async ()=>{
+    fetchShow.mockResolvedValueOnce({
+        data:[testShow]
+    })
+    render(<Display />);
+    const button = screen.getByRole("button");
+    userEvent.click(button);
+    const show = await screen.findAllByTestId('show-container');
+    expect(show).toHaveLength(1);
+
+})
+
 
 
 
