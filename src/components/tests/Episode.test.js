@@ -17,7 +17,7 @@ const testEpisodeWithoutImage = {
 }
 
 test("renders without error", () => {
-
+    render(<Episode episode = {{}} />);
 });
 
 test("renders the summury test passed as prop", ()=>{
