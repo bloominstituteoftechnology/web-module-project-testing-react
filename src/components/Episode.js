@@ -10,7 +10,7 @@ const Episode = (props)=> {
         <div className="episode-info">
             <p className="episode-number">Season {season}, Episode {number}</p>
             <h3>{name}</h3>
-            <p>{summary}</p>
+            <p data-testid="summary">{summary}</p>
             <div className="flex-spacer" />
             <p className="episode-runtime">{runtime} minutes</p>
         </div>
