@@ -13,11 +13,23 @@ const testEpisode = {
 }
 
 const testEpisodeWithoutImage = {
-    //Add in approprate test data structure here.
-}
+    id:1,
+    name: "",
+    image: "http://static.tvmaze.com/uploads/images/medium_landscape/67/168918.jpg",	 
+    season: 1,	    
+    number: 1,
+    summary: "test summary",
+    runtime: 1	 
+}	  
+
+
 
 test("renders without error", () => {
 
+    render(
+        <Episode episode={testEpisode} />
+    );
+    
 });
 
 test("renders the summury test passed as prop", ()=>{
