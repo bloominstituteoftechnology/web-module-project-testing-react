@@ -7,7 +7,7 @@ test('target dropdown', async ()=>{
 
     await waitFor(()=>{
         const placeholder = screen.queryAllByPlaceholderText('Select an option');
-        // console.log(placeholder);
+        console.log(placeholder);
     });
     
 });
