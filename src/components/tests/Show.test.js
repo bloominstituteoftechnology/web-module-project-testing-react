@@ -6,21 +6,65 @@ import Show from './../Show';
 
 const testShow = {
     //add in approprate test data structure here.
+    name: 'name',
+    summary: 'This is a summary',
+    seasons: [{
+        id:1,
+        name: 'Joseph',
+        episodes:[]
+    },
+    {
+        id:2,
+        name: 'Trader',
+        episodes:[]
+    },
+    {
+        id:3,
+        name: 'Joe',
+        episodes:[]
+    }
+    ]
+}
+const testShow2 = {
+    //add in approprate test data structure here.
+    name: 'name',
+    image: 'http://static.tvmaze.com/uploads/images/medium_landscape/67/168918.jpg',
+    summary: 'This is a summary',
+    seasons: 'season 10'
 }
 
 test('renders testShow and no selected Season without errors', ()=>{
+    render(<Show show={testShow} selectedSeason={'none'}/>);
 });
 
 test('renders Loading component when prop show is null', () => {
+    render(<Show show={null}/>);
+    const loading = screen.queryByTestId('loading-container');
+    expect(loading).toBeTruthy();
 });
 
 test('renders same number of options seasons are passed in', ()=>{
+    render(<Show show={testShow} selectedSeason={'none'}/>);
+    let seasons = screen.queryAllByTestId('season-option');
+    expect(seasons).toHaveLength(3);
+
 });
 
 test('handleSelect is called when an season is selected', () => {
+    const fakeHandleSelect = jest.fn();
+    render(<Show show={testShow} selectedSeason={'none'} handleSelect={fakeHandleSelect}/>)
+    userEvent.selectOptions(screen.getByRole('combobox'), '3');
+    expect(screen.getByText('Joe').selected).toBe(true);
+    expect(fakeHandleSelect).toHaveBeenCalled();
 });
 
 test('component renders when no seasons are selected and when rerenders with a season passed in', () => {
+    const { rerender } = render(<Show show={testShow} selectedSeason={'none'}/>);
+    let episodes = screen.queryAllByTestId('episodes-container');
+    expect(episodes).toHaveLength(0);
+    rerender(<Show show={testShow} selectedSeason={'1'}/>)
+    episodes = screen.queryAllByTestId('episodes-container');
+    expect(episodes).toHaveLength(1);
 });
 
 //Tasks:
