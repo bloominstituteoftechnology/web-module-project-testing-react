@@ -1,7 +1,11 @@
 import React from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+
 import Display from './../Display'
+
+import mockFetchShow from './../../api/fetchShow'
+jest.mock('./../../api/fetchShow')
 
 const testShow = {
     //add in approprate test data structure here.
@@ -23,6 +27,15 @@ const testShow = {
 
 test ("render without errors", () => {
     render (<Display />);
+})
+
+test ("renders Show component when the button is click", async () => {
+    mockFetchShow.mockResolvedValueOnce(testShow);
+    render (<Display />);
+    const button = screen.queryByRole("button");
+    userEvent.click(button);
+
+    const show = await screen.findByTestId("show-container");
 })
 
 
