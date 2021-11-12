@@ -38,7 +38,7 @@ test("renders the summury test passed as prop", ()=>{
 
 test("renders default image when image is not defined", ()=>{
     render (<Episode episode = { testEpisodeWithoutImage }/>); 
-    const image = screen.queryAllByAltText("./stranger_things.png");
+    const image = screen.queryByAltText ("./stranger_things.png");
     // console.log('image: ', image);
     expect(image).toBeInTheDocument();
 })
