@@ -31,14 +31,28 @@ test ("render without errors", () => {
 
 test ("renders Show component when the button is click", async () => {
     mockFetchShow.mockResolvedValueOnce(testShow);
+
     render (<Display />);
     const button = screen.queryByRole("button");
     userEvent.click(button);
 
     const show = await screen.findByTestId("show-container");
+    expect(show).toBeInTheDocument();
 })
 
+test ("render season options matching fetch return when button is clicked", async () => {
+    mockFetchShow.mockResolvedValueOnce(testShow);
+    
+    render (<Display />);
+    const button = screen.queryByRole("button");
+    userEvent.click(button);
 
+    await waitFor(() => {
+        const seasonOptions = screen.queryAllByTestId("season-option");
+        // console.log('seasonOptions: ', seasonOptions);
+        expect(seasonOptions).toHaveLength(2);
+    });
+})
 
 
 
