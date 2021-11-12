@@ -3,6 +3,24 @@ import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Display from './../Display'
 
+const testShow = {
+    //add in approprate test data structure here.
+    name: "test show",
+    summary: "test summary",
+    seasons: [
+        {
+            id: 0,
+            name: "season 1",
+            episode: []
+        },
+        {
+            id: 1,
+            name: "season 2",
+            episodes: []
+        }
+    ]
+}
+
 test ("render without errors", () => {
     render (<Display />);
 })
