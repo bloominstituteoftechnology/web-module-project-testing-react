@@ -53,7 +53,9 @@ test('component renders when no seasons are selected and when rerenders with a s
     let episodes = screen.queryByTestId("episodes-container");
     expect(episodes).not.toBeInTheDocument();
 
-    rerender(<Show show = {testShow}  selectedSeason = {"none"} />);
+    rerender(<Show show = {testShow}  selectedSeason = {"1"} />);
+    episodes = screen.queryByTestId("episodes-container");
+    expect(episodes).toBeInTheDocument();
 });
 
 //Tasks:
