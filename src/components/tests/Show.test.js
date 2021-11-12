@@ -8,7 +8,7 @@ const testShow = {
     //add in approprate test data structure here.
     name: "test show",
     summary: "test summary",
-    season: [
+    seasons: [
         {
             id: 0,
             name: "season 1",
@@ -17,7 +17,7 @@ const testShow = {
         {
             id: 1,
             name: "season 2",
-            episode: []
+            episodes: []
         }
     ]
 }
