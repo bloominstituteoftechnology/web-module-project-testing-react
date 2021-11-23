@@ -54,9 +54,15 @@ Get the project fired up and start using it as a user would. Try to go through t
 * [ ] Notice the optional functional prop passed in to the Display component client code. Test that when the fetch button is pressed, this function is called.
 
 ### Stretch goals
-
 - Add in a testing suite for the episodes component.
 
 - Look up the `TVMaze` API. Add a dropdown with the titles of some other popular shows. Add the user sequence of choosing a different show to fetch data for different shows.
 
 - Add React Router, and add the functionality to click an episode and navigate to an episode page.
+
+### Submission Format
+- [ ] If this is your first time connecting a submission, authorize your github account within the codegrade assignment.
+- [ ] Connect your fork to Codegrade using the "Connect Git" button.
+- [ ] Find your newly created fork from the list and push your work to main.
+- [ ] Check this video for details: www.youtube.com/watch?v=fC2BO7dI6IQ
+
