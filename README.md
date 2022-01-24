@@ -33,7 +33,7 @@ Get the project fired up and start using it as a user would. Try to go through t
 
 * [ ] Complete a test that shows the Episode component renders. Pass in the provided example episode data as a test prop.
 * [ ] Modify the test data to display a specific summary statement. Complete a test that shows that the summary value passed in to the Episode component displays as expected. **Use at least then 3 different types of expect statements to test the the existence of the summary value.**
-* [ ] The episode component displays a default value ('./stranger_things.png') when a image url is not provided. Create a new piece of test data with the image property set to `null`. Test that the alt tag of the image displayed is set to './stranger_things.png'.
+* [ ] The episode component displays a default value ('https://i.ibb.co/2FsfXqM/stranger-things.png') when a image url is not provided. Create a new piece of test data with the image property set to `null`. Test that the alt tag of the image displayed is set to './stranger_things.png'.
 
 ### The Show Component
 > *This component holds all general information on our featured show. Here we will once again work with data props, mock a function for testing and rerender our component for a change in data.*
