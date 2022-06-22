@@ -8,7 +8,7 @@ const Episode = (props) => {
   console.log("episode: ", episode);
 
   return (
-    <div className="episode" key={id}>
+    <div className="episode" data-testid="episode" key={id}>
       <img className="episode-image" src={imgsrc} alt={imgsrc} />
       <div className="episode-info">
         <p className="episode-number">Season {season}, Episode {number}</p>
