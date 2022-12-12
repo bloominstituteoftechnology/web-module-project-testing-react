@@ -3,10 +3,11 @@ import stripTags from 'striptags';
 
 const formatSeasons = (allEpisodes) => {
   const seasons = [
-    {id:0, name: "Season 1", episodes: []}, 
-    {id:1, name: "Season 2", episodes: []}, 
-    {id:2, name: "Season 3", episodes: []}, 
-    {id:3, name: "Season 4", episodes: []}
+    {id:0, name: "Season 1", episodes: []},
+    {id:1, name: "Season 2", episodes: []},
+    {id:2, name: "Season 3", episodes: []},
+    {id:3, name: "Season 4", episodes: []},
+    {id:4, name: "Season 5", episodes: []},
   ];
 
   allEpisodes.forEach((episode) => {
@@ -26,7 +27,7 @@ const fetchShow = () => {
     .get("https://api.tvmaze.com/singlesearch/shows?q=stranger+things&embed=episodes")
     .then(res => {
       const { data } = res;
-      
+
       return {
         name: data.name,
         image: data.image,
